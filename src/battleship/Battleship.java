@@ -4,7 +4,7 @@ import myExceptions.*;
 
 public class Battleship {
     public static void main(String[] args) {
-        Board fboard = new Board();
+        FriendlyBoard fboard = new FriendlyBoard();
         Carrier carrier = new Carrier(2,1,true);
         BattleShip battleship = new BattleShip(1,1,true);
         Submarine submarine = new Submarine(4,4,true);
