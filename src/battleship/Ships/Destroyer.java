@@ -1,22 +1,22 @@
 package battleship.Ships;
 
-public class Cruiser extends Ship {
-    public Cruiser(int _x, int _y, boolean _isVertical)
+public class Destroyer extends Ship {
+    public Destroyer(int _x, int _y, boolean _isVertical)
     {
         super(_x, _y, _isVertical);
-        length = 3;
-        charRepresentation = 'C';
+        length = 2;
+        charRepresentation = 'D';
     }
     
     /** 
      * When constructed with no parameters, the location (x,y) and isVertical
      * are randomized. 
      */
-    public Cruiser()
+    public Destroyer()
     {
         super();
-        length = 3;
-        charRepresentation = 'C';
+        length = 2;
+        charRepresentation = 'D';
         randomizeLocation();
     }
 }
