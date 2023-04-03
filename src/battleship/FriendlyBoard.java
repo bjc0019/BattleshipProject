@@ -47,16 +47,16 @@ public class FriendlyBoard {
     /** 
      * Returns the char representation of the board at coordinates (x,y)
      @return char 'E' (empty), 'A'(Aircraft Carrier), 'B'(Battleship), 'S'(Submarine), 'C'(Cruiser), or 'D'(Destroyer) 
-     @param _x x coordinate on the board, starting at 0 index
-     @param _y y coordinate on the board, starting at 0 index
+     @param x x coordinate on the board, starting at 0 index
+     @param y y coordinate on the board, starting at 0 index
      @throws IndexOutOfBounds exception if either x or y is not within the board
      */
-    public char getTile(int _x, int _y) throws IndexOutOfBounds
+    public char getTile(int x, int y) throws IndexOutOfBounds
     {
-        if (_x < BOARD_SIZE && _y < BOARD_SIZE && _x >= 0 && _y >= 0)
-            return board[(_x)][_y];
+        if (x < BOARD_SIZE && y < BOARD_SIZE && x >= 0 && y >= 0)
+            return board[(x)][y];
         else
-            throw new myExceptions.IndexOutOfBounds("Invalid x,y pair (" + _x + ", " + _y + ')');
+            throw new IndexOutOfBounds("Invalid x,y pair (" + x + ", " + y + ')');
     }
     
     
@@ -111,20 +111,9 @@ public class FriendlyBoard {
     }
     
     
-    /** 
-     * Sets the board at coordinates (x,y) to char _in
-     @param _x x coordinate on the board, starting at 0 index
-     @param _y y coordinate on the board, starting at 0 index
-     @param _input char that gets put in the board
-     @throws IndexOutOfBounds exception if either x or y is not within the board
-     */
-    private void setTile(int _x, int _y, char _input) throws IndexOutOfBounds
-    {
-        if (_x < BOARD_SIZE && _y < BOARD_SIZE && _x >= 0 && _y >= 0)
-            board[_x][_y] = _input;
-        else
-            throw new myExceptions.IndexOutOfBounds("Invalid (x,y) pair (" + _x + ", " + _y + ')');
-    }
+
+    
+    
     /** Prints the current board to the console, used for debugging. */
     public void printBoard()
     {
@@ -197,6 +186,24 @@ public class FriendlyBoard {
         // Once ship is placed validly, return true
         return true;
     }
+    
+    
+    
+    /** 
+     * Sets the board at coordinates (x,y) to char _in
+     @param _x x coordinate on the board, starting at 0 index
+     @param _y y coordinate on the board, starting at 0 index
+     @param _input char that gets put in the board
+     @throws IndexOutOfBounds exception if either x or y is not within the board
+     */
+    private void setTile(int _x, int _y, char _input) throws IndexOutOfBounds
+    {
+        if (_x < BOARD_SIZE && _y < BOARD_SIZE && _x >= 0 && _y >= 0)
+            board[_x][_y] = _input;
+        else
+            throw new myExceptions.IndexOutOfBounds("Invalid (x,y) pair (" + _x + ", " + _y + ')');
+    }
+    
     
     
     /**

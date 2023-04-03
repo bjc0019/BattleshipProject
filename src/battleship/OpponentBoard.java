@@ -1,5 +1,7 @@
 package battleship;
 
+import java.util.ArrayList;
+import java.util.Random;
 import myExceptions.*;
 
 /**
@@ -24,6 +26,8 @@ public class OpponentBoard {
     /** Guessing accuracy, defined as hits/misses as a percent. */
     private float accuracy;
     
+    /** Holds points not guessed by the player, so they don't repeat guesses. */
+    private ArrayList<int[]> pointsToGuess;
     
     // ******************************************************************************************************************
     // Constructors
@@ -37,11 +41,18 @@ public class OpponentBoard {
         numMisses = 0;
         accuracy = 0;
         
-        // Declare and initialize board array
+        // Initialize board array
         board = new char[BOARD_SIZE][BOARD_SIZE];
         for(int i = 0; i < BOARD_SIZE; i++)
             for(int j = 0; j < BOARD_SIZE; j++)
                 board[i][j] = 'E';
+        
+        // Initialize array of points to guess
+        pointsToGuess = new ArrayList<int[]>();
+        
+        for(int i = 0; i < BOARD_SIZE; i++)
+            for(int j = 0; j < BOARD_SIZE; j++)
+                pointsToGuess.add(new int[]{i,j});
     }
     
     // ******************************************************************************************************************
@@ -62,7 +73,7 @@ public class OpponentBoard {
             throw new IndexOutOfBounds(String.format("Either x value %d or y value %d is less than 0", _x, _y));
         if(_x > BOARD_SIZE || _y > BOARD_SIZE)
             throw new IndexOutOfBounds(String.format("Either x: %d or y: %d is larger than board size %d", _x, _y, BOARD_SIZE));
-        if(_newGuess != 'H' || _newGuess != 'M')
+        if(_newGuess != 'H' && _newGuess != 'M')
             throw new IndexOutOfBounds(String.format("Char input %c is not 'H' or 'M'", _newGuess));
         
         // Update board with new value
@@ -78,13 +89,51 @@ public class OpponentBoard {
         if(numHits + numMisses != 0)
             accuracy = numHits / (numHits + numMisses) * 100;
     }
+    
+   
+    /**
+     * Returns char value at x,y.
+     * @param _x 0 Indexed x coordinate 
+     * @param _y 0 Indexed y coordinate
+     * @return Char value at x,y on the board
+     * @throws IndexOutOfBounds if x or y aren't between 0-9
+     */
+    public char getTile(int _x, int _y) throws IndexOutOfBounds
+    {
+        if (_x < BOARD_SIZE && _y < BOARD_SIZE && _x >= 0 && _y >= 0)
+            return board[_x][_y];
+        else
+            throw new IndexOutOfBounds("Invalid x,y pair (" + _x + ", " + _y + ')');
+    }
+    
+    
+    
+    /** 
+     * Returns the player's guessing accuracy
+     * @return A float with the player's guessing accuracy
+     */
+    public float getAccuracy()
+    {
+        return accuracy;
+    }
+    
+    
     /** 
      * Generates an optimal guess based on the hits and misses on the board array
-     * @return An int array holding [x, y] for the next guess
+     * @return An int array holding [x, y] for the next guess.
      */
     public int[] generateGuess()
     {
-        int returnValue[] = {0,0};
+        Random rng = new Random();
+        int returnValue[];
+        int index;
+        
+        // Select a random element from the array list of tiles to guess
+        index = rng.nextInt(pointsToGuess.size());
+        returnValue = pointsToGuess.get(index).clone();
+        pointsToGuess.remove(index);
+        
+        // Return coordinate pair
         return returnValue;
     }
     
