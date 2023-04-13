@@ -1,6 +1,7 @@
 package battleship;
 import battleship.Ships.*;
 import myExceptions.*;
+import battleship.view.*;
 
 
 public class FriendlyBoard {
@@ -112,9 +113,48 @@ public class FriendlyBoard {
     
     
 
+
+    public void updateBoatButtons() {
+        for(int i = 0; i < BOARD_SIZE; i++) {
+            for(int j = 0; j < BOARD_SIZE; j++) {
+                try {
+                    if (this.getTile(j, BOARD_SIZE - 1 - i) == 'E')
+                        playerBoard.friendlyBoatsButtons[i][j].setText(" ");
+                    else
+                        playerBoard.friendlyBoatsButtons[i][j].setText(Character.toString(this.getTile(j, BOARD_SIZE - 1 - i)));
+                }
+                catch(IndexOutOfBounds ex) {
+                    System.out.println("Error updating board buttons: " + ex.getMessage());
+                    System.exit(1);
+                }
+            }
+        }
+    }
+   
+    public void updateGuessButtons() {
+        for(int i = 0; i < BOARD_SIZE; i++) {
+            for(int j = 0; j < BOARD_SIZE; j++) {
+                try {
+                    if (this.getTile(j, BOARD_SIZE - 1 - i) == 'E')
+                        botBoard.friendlyGuessButtons[i][j].setText("FG");
+                    else
+                        botBoard.friendlyGuessButtons[i][j].setText(Character.toString(this.getTile(j, BOARD_SIZE - 1 - i)));
+                }
+                catch(IndexOutOfBounds ex) {
+                    System.out.println("Error updating board buttons: " + ex.getMessage());
+                    System.exit(1);
+                }
+            }
+        }
+    }
     
+    //private playerBoard thisGUI; // Add playerBoard member variable
     
+   // public void setLabel(String label) {
+    //    thisGUI.titleLabel.setText(label); // Use playerBoard reference to access titleLabel object
+    //}
     /** Prints the current board to the console, used for debugging. */
+    /*
     public void printBoard()
     {
         for(int i = 0; i < BOARD_SIZE; i++) {
@@ -263,3 +303,4 @@ public class FriendlyBoard {
         
     }
 }
+

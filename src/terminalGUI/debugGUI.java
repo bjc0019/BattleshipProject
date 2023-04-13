@@ -3,9 +3,14 @@ package terminalGUI;
 import battleship.*;
 import static battleship.FriendlyBoard.BOARD_SIZE;
 import battleship.Ships.*;
+import battleship.view.playerBoard;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.Scanner;
 import myExceptions.IndexOutOfBounds;
 import java.util.ArrayList;
+import javax.swing.JButton;
+import javax.swing.JOptionPane;
 
 /**
  * Singleton class that emulates the real GUIs behavior in the terminal. 
@@ -30,7 +35,7 @@ public class debugGUI {
     // ******************************************************************************************************************
     
     /** Empty constructor called by getInstance(). */
-    private debugGUI() {}
+    public debugGUI() {}
     
     // ******************************************************************************************************************
     // Methods
@@ -68,36 +73,25 @@ public class debugGUI {
         }
     }
     
-    public void placeShips(FriendlyBoard _fboard)
-    {  
+    public void placeShips(FriendlyBoard _fboard) {
         BattleShip battleship = new BattleShip();
         Carrier carrier = new Carrier();
         Cruiser cruiser = new Cruiser();
         Destroyer destroyer = new Destroyer();
         Submarine submarine = new Submarine();
-        
-        do {
-            getShipInfo("Battleship", battleship);
-        } while(!_fboard.placeShip(battleship));
-        
-        do {
-            getShipInfo("Carrier", carrier);
-        } while(!_fboard.placeShip(carrier));
-        
-        do {
-            getShipInfo("Cruiser", cruiser);
-        } while(!_fboard.placeShip(cruiser));
-        
-        do {
-            getShipInfo("Destroyer", destroyer);
-        } while(!_fboard.placeShip(destroyer));
-        
-        do {
-            getShipInfo("Submarine", submarine);
-        } while(!_fboard.placeShip(submarine));     
-    }
+        };
+
+        // add the MouseAdapter to each button in the friendlyBoard
+        //gameBoard view = new playerBoard();
+        //JButton[][] friendlyBoardButtons = view.getFriendlyBoardButtons();
+        //for (int row = 0; row < 10; row++) {
+         //   for (int col = 0; col < 10; col++) {
+         //       friendlyBoardButtons[row][col].addMouseListener(mouseAdapter);
+        //    }
+        //}
     
-    
+
+
     public void printBoard(FriendlyBoard _fboard, OpponentBoard _oboard)
     {
         // Print Opponent Board first

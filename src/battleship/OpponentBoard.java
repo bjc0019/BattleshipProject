@@ -1,5 +1,9 @@
 package battleship;
 
+import static battleship.FriendlyBoard.BOARD_SIZE;
+import battleship.view.botBoard;
+import battleship.view.playerBoard;
+import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Random;
 import myExceptions.*;
@@ -79,6 +83,8 @@ public class OpponentBoard {
         // Update board with new value
         board[_x][_y] = _newGuess;
         
+        
+        
         // Update statistical variables
         if(_newGuess == 'H')
             numHits++;
@@ -90,6 +96,76 @@ public class OpponentBoard {
             accuracy = numHits / (numHits + numMisses) * 100;
     }
     
+     public void updateBoatButtons() {
+        for(int i = 0; i < BOARD_SIZE; i++) {
+            for(int j = 0; j < BOARD_SIZE; j++) {
+                try {
+                    if (this.getTile(j, BOARD_SIZE - 1 - i) == 'E')
+                        botBoard.botBoatsButtons[i][j].setText("OB");
+                    else
+                        botBoard.botBoatsButtons[i][j].setText(Character.toString(this.getTile(j, BOARD_SIZE - 1 - i)));
+                }
+                catch(IndexOutOfBounds ex) {
+                    System.out.println("Error updating board buttons: " + ex.getMessage());
+                    System.exit(1);
+                }
+            }
+        }
+    }
+     
+    public void updateGuessButtons() {
+        for(int i = 0; i < BOARD_SIZE; i++) {
+            for(int j = 0; j < BOARD_SIZE; j++) {
+                try {
+                    if (this.getTile(j, BOARD_SIZE - 1 - i) == 'E')
+                        playerBoard.botGuessButtons[i][j].setText("OG");
+                    else
+                        playerBoard.botGuessButtons[i][j].setText(Character.toString(this.getTile(j, BOARD_SIZE - 1 - i)));
+                }
+                catch(IndexOutOfBounds ex) {
+                    System.out.println("Error updating board buttons: " + ex.getMessage());
+                    System.exit(1);
+                }
+            }
+        }
+    }    
+       
+ 
+    
+    
+    
+   /*
+    public void updateBoardButtons() {
+    for(int i = 0; i < BOARD_SIZE; i++) {
+        for(int j = 0; j < BOARD_SIZE; j++) {
+            try {
+                if (this.getTile(j, BOARD_SIZE - 1 - i) == 'E') {
+                    playerBoard.botGuessButtons[i][j].setText("O!");
+                } else {
+                    playerBoard.botGuessButtons[i][j].setText(Character.toString(this.getTile(j, BOARD_SIZE - 1 - i)));
+                }
+       
+                // Update botGuessButtons
+                char tile = this.getTile(j, BOARD_SIZE - 1 - i);
+                if (tile == 'H') {
+                    playerBoard.botGuessButtons[i][j].setText("H");
+                    playerBoard.botGuessButtons[i][j].setBackground(Color.RED);
+                } else if (tile == 'M') {
+                    playerBoard.botGuessButtons[i][j].setText("M");
+                    playerBoard.botGuessButtons[i][j].setBackground(Color.WHITE);
+                } else {
+                    playerBoard.botGuessButtons[i][j].setText(" ");
+                }
+                
+            } catch(IndexOutOfBounds ex) {
+                System.out.println("Error updating board buttons: " + ex.getMessage());
+                System.exit(1);
+            }
+        }
+    }
+}
+*/
+ /**   
    
     /**
      * Returns char value at x,y.
@@ -137,4 +213,23 @@ public class OpponentBoard {
         return returnValue;
     }
     
+/**
+    public void updateBoardButtons() {
+        for(int i = 0; i < BOARD_SIZE; i++) {
+            for(int j = 0; j < BOARD_SIZE; j++) {
+                try {
+                    if (this.getTile(j, BOARD_SIZE - 1 - i) == 'E')
+                        gameBoard.botBoardButtons[i][j].setText(" ");
+                    else
+                        gameBoard.botBoardButtons[i][j].setText(Character.toString(this.getTile(j, BOARD_SIZE - 1 - i)));
+                }
+                catch(IndexOutOfBounds ex) {
+                    System.out.println("Error updating board buttons: " + ex.getMessage());
+                    System.exit(1);
+                }
+            }
+        }
+    }
+*/
+
 }
