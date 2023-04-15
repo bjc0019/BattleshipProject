@@ -7,7 +7,6 @@ import battleship.view.*;
 import java.util.concurrent.Semaphore;
 public class Game {
     public static void main(String[] args) {
-        
 
             Semaphore playgameSemaphore = new Semaphore(0); // a semaphore to prevent the code from executing any further until play game is pressed in menuBoard
             FriendlyBoard playerShipBoard = new FriendlyBoard();
@@ -15,7 +14,7 @@ public class Game {
 
             FriendlyBoard botShipBoard = new FriendlyBoard();
             OpponentBoard botGuessBoard = new OpponentBoard();
- 
+
             int playerHits = 0, botHits = 0;
             int[] coordinate;
             Random rng = new Random();
@@ -26,6 +25,8 @@ public class Game {
           
             playerBoard launchPlayerView = new playerBoard();
             botBoard launchBotView = new botBoard();
+            //we don't need to see the bot's board.
+            launchBotView.setVisible(false);
         //while(true) {
             /*
             Carrier carrier = new Carrier(2,1,true);
@@ -45,9 +46,9 @@ public class Game {
             //if(Objects.equals(userInput, "quit")) 
              //   break;
             
-            // Allow the player to initialize their board and create the opponents
-           // gui.placeShips(playerShipBoard);
-            playerShipBoard.randomizeBoard();       // For testing, just randomize the player board cause placing ships in the terminal is a pain
+           // Allow the player to initialize their board and create the opponents
+            playerShipBoard.playerPlaceShips(launchPlayerView);
+            //playerShipBoard.randomizeBoard();       // For testing, just randomize the player board cause placing ships in the terminal is a pain
             botShipBoard.randomizeBoard();          // Randomize opponent board  
             
            // playerShipBoard.updateBoatButtons(); // This is the left board on the player's screen that shows the player's board
@@ -55,8 +56,6 @@ public class Game {
             
            // botShipBoard.updateGuessButtons(); //Right side of Bot screen
            // botGuessBoard.updateGuessButtons();
-           
-             
             
             // Start gameplay loop, guessing back and forth
             while(true) {
@@ -66,7 +65,8 @@ public class Game {
             // Update the boards with the player's guess, and generate one from the bot
             try {
                 // First, process the player
-                coordinate = playerGuessBoard.generateGuess();
+                coordinate = launchPlayerView.getUserInput();
+                
                 if(botShipBoard.getTile(coordinate[0], coordinate[1]) != 'E') {   // If the player has a hit
                     playerGuessBoard.updateBoard(coordinate[0], coordinate[1], 'H');
                     playerHits++;
@@ -88,7 +88,6 @@ public class Game {
                 System.out.println(e);
                 System.exit(1);
             }
-            
             
             playerShipBoard.updateBoatButtons(); // This is the left board on the player's screen that shows the player's board
             botGuessBoard.updateBoatButtons(); // This is the right board on the player's screen that shows where the bot has guessed 
@@ -114,6 +113,6 @@ public class Game {
             }
            System.out.println("END of CODE:");
         //}
-    }  
+    }
 }
 
