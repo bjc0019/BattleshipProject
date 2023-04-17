@@ -101,9 +101,9 @@ public class OpponentBoard {
             for(int j = 0; j < BOARD_SIZE; j++) {
                 try {
                     if (this.getTile(j, BOARD_SIZE - 1 - i) == 'E')
-                        botBoard.botBoatsButtons[i][j].setText("OB");
+                        botBoard.botPanelButtonsLeft[i][j].setText("OB");
                     else
-                        botBoard.botBoatsButtons[i][j].setText(Character.toString(this.getTile(j, BOARD_SIZE - 1 - i)));
+                        botBoard.botPanelButtonsLeft[i][j].setText(Character.toString(this.getTile(j, BOARD_SIZE - 1 - i)));
                 }
                 catch(IndexOutOfBounds ex) {
                     System.out.println("Error updating board buttons: " + ex.getMessage());
@@ -118,9 +118,9 @@ public class OpponentBoard {
             for(int j = 0; j < BOARD_SIZE; j++) {
                 try {
                     if (this.getTile(j, BOARD_SIZE - 1 - i) == 'E')
-                        playerBoard.botGuessButtons[i][j].setText("OG");
+                        botBoard.botPanelButtonsRight[i][j].setText(" ");
                     else
-                        playerBoard.botGuessButtons[i][j].setText(Character.toString(this.getTile(j, BOARD_SIZE - 1 - i)));
+                        botBoard.botPanelButtonsRight[i][j].setText(Character.toString(this.getTile(j, BOARD_SIZE - 1 - i)));
                 }
                 catch(IndexOutOfBounds ex) {
                     System.out.println("Error updating board buttons: " + ex.getMessage());
@@ -140,21 +140,21 @@ public class OpponentBoard {
         for(int j = 0; j < BOARD_SIZE; j++) {
             try {
                 if (this.getTile(j, BOARD_SIZE - 1 - i) == 'E') {
-                    playerBoard.botGuessButtons[i][j].setText("O!");
+                    playerBoard.friendlyPanelButtonsRight[i][j].setText("O!");
                 } else {
-                    playerBoard.botGuessButtons[i][j].setText(Character.toString(this.getTile(j, BOARD_SIZE - 1 - i)));
+                    playerBoard.friendlyPanelButtonsRight[i][j].setText(Character.toString(this.getTile(j, BOARD_SIZE - 1 - i)));
                 }
        
-                // Update botGuessButtons
+                // Update friendlyPanelButtonsRight
                 char tile = this.getTile(j, BOARD_SIZE - 1 - i);
                 if (tile == 'H') {
-                    playerBoard.botGuessButtons[i][j].setText("H");
-                    playerBoard.botGuessButtons[i][j].setBackground(Color.RED);
+                    playerBoard.friendlyPanelButtonsRight[i][j].setText("H");
+                    playerBoard.friendlyPanelButtonsRight[i][j].setBackground(Color.RED);
                 } else if (tile == 'M') {
-                    playerBoard.botGuessButtons[i][j].setText("M");
-                    playerBoard.botGuessButtons[i][j].setBackground(Color.WHITE);
+                    playerBoard.friendlyPanelButtonsRight[i][j].setText("M");
+                    playerBoard.friendlyPanelButtonsRight[i][j].setBackground(Color.WHITE);
                 } else {
-                    playerBoard.botGuessButtons[i][j].setText(" ");
+                    playerBoard.friendlyPanelButtonsRight[i][j].setText(" ");
                 }
                 
             } catch(IndexOutOfBounds ex) {

@@ -166,15 +166,15 @@ public class FriendlyBoard {
     
     
 
-
-    public void updateBoatButtons() {
+    // Curentlt printing friendly boats
+    public void updateBoatButtons() { 
         for(int i = 0; i < BOARD_SIZE; i++) {
             for(int j = 0; j < BOARD_SIZE; j++) {
                 try {
                     if (this.getTile(j, BOARD_SIZE - 1 - i) == 'E')
-                        playerBoard.friendlyBoatsButtons[i][j].setText(" ");
+                        playerBoard.friendlyPanelButtonsLeft[i][j].setText(" ");
                     else
-                        playerBoard.friendlyBoatsButtons[i][j].setText(Character.toString(this.getTile(j, BOARD_SIZE - 1 - i)));
+                        playerBoard.friendlyPanelButtonsLeft[i][j].setText(Character.toString(this.getTile(j, BOARD_SIZE - 1 - i)));
                 }
                 catch(IndexOutOfBounds ex) {
                     System.out.println("Error updating board buttons: " + ex.getMessage());
@@ -184,14 +184,15 @@ public class FriendlyBoard {
         }
     }
    
+// Currently printing Opponent Boats
     public void updateGuessButtons() {
         for(int i = 0; i < BOARD_SIZE; i++) {
             for(int j = 0; j < BOARD_SIZE; j++) {
                 try {
                     if (this.getTile(j, BOARD_SIZE - 1 - i) == 'E')
-                        botBoard.friendlyGuessButtons[i][j].setText("FG");
+                        playerBoard.friendlyPanelButtonsRight[i][j].setText("BB");
                     else
-                        botBoard.friendlyGuessButtons[i][j].setText(Character.toString(this.getTile(j, BOARD_SIZE - 1 - i)));
+                        playerBoard.friendlyPanelButtonsRight[i][j].setText(Character.toString(this.getTile(j, BOARD_SIZE - 1 - i)));
                 }
                 catch(IndexOutOfBounds ex) {
                     System.out.println("Error updating board buttons: " + ex.getMessage());

@@ -29,12 +29,12 @@ public class playerBoard extends JFrame {
     public JMenuItem homeMenuItem = new JMenuItem("Home");
     public int[] last_coordinate_selected = {0,0};
 
-    private JPanel friendlyBoatsPanel;
-    private JPanel botGuessPanel;
+    private JPanel friendlypanelLeft;
+    private JPanel friendlypanelRight;
     private Semaphore currentSemaphore;
     
-    public static JButton[][] friendlyBoatsButtons;
-    public static JButton[][] botGuessButtons;
+    public static JButton[][] friendlyPanelButtonsLeft;
+    public static JButton[][] friendlyPanelButtonsRight;
     
     public playerBoard() {
 
@@ -42,29 +42,29 @@ public class playerBoard extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
         //Create the GameBoard GUI, a 10x10 grid to play on that 
-        //Displays both the bot and user boards.
-        friendlyBoatsPanel = new JPanel();
-        friendlyBoatsPanel.setLayout(new GridLayout(10, 10, 0, 0)); //set grid dimensions
-        friendlyBoatsPanel.setPreferredSize(new Dimension(550, 550)); // Set preferred size
+        //displays both the bot and user boards.
+        friendlypanelLeft = new JPanel();
+        friendlypanelLeft.setLayout(new GridLayout(10, 10, 0, 0)); //set grid dimensions
+        friendlypanelLeft.setPreferredSize(new Dimension(250, 250)); // Set preferred size
         
-        friendlyBoatsButtons = new JButton[10][10];
+        friendlyPanelButtonsLeft = new JButton[10][10];
         
-        botGuessPanel = new JPanel();
-        botGuessPanel.setLayout(new GridLayout(10, 10, 0, 0));
-        botGuessPanel.setPreferredSize(new Dimension(550, 550)); // Set preferred size
+        friendlypanelRight = new JPanel();
+        friendlypanelRight.setLayout(new GridLayout(10, 10, 0, 0));
+        friendlypanelRight.setPreferredSize(new Dimension(250, 250)); // Set preferred size
         
-        botGuessButtons = new JButton[10][10];
+        friendlyPanelButtonsRight = new JButton[10][10];
 
-        // Add buttons to friendlyBoatsPanel and botGuessPanel
+        // Add buttons to friendlypanelLeft and friendlypanelRight
         Font font = new Font("Arial", Font.BOLD, 12);
         for (int rowc = 0; rowc < 10; rowc++) {
             for (int col = 0; col < 10; col++) {
                 int row = rowc;
-                friendlyBoatsButtons[row][col] = new JButton();
-                botGuessButtons[row][col] = new JButton();
+                friendlyPanelButtonsLeft[row][col] = new JButton();
+                friendlyPanelButtonsRight[row][col] = new JButton();
                 
-                friendlyBoatsButtons[row][col].setFont(font);
-                botGuessButtons[row][col].setFont(font);
+                friendlyPanelButtonsLeft[row][col].setFont(font);
+                friendlyPanelButtonsRight[row][col].setFont(font);
                 
                 //this is a 90 degree rotation that maps 0,0 in the button grid to 0,0 in the boat grid.
                 //0,0 in the button grid is in the top-left, while 0,0 in the main grid is in the bottom-left.
@@ -72,14 +72,14 @@ public class playerBoard extends JFrame {
                 final int fcol = 9 - row;
 
                 //add an acion listener for each button.
-                botGuessButtons[row][col].addActionListener(new ActionListener() {
+                friendlyPanelButtonsRight[row][col].addActionListener(new ActionListener() {
                     public void actionPerformed(ActionEvent e) {
                         currentSemaphore.release();
                         last_coordinate_selected[0] = frow;
                         last_coordinate_selected[1] = fcol;
                     }
                 });
-                friendlyBoatsButtons[row][col].addActionListener(new ActionListener() {
+                friendlyPanelButtonsLeft[row][col].addActionListener(new ActionListener() {
                     public void actionPerformed(ActionEvent e) {
                         currentSemaphore.release();
                         last_coordinate_selected[0] = frow;
@@ -87,14 +87,14 @@ public class playerBoard extends JFrame {
                     }
                 });
                 
-                friendlyBoatsPanel.add(friendlyBoatsButtons[row][col]);
-                botGuessPanel.add(botGuessButtons[row][col]);
+                friendlypanelLeft.add(friendlyPanelButtonsLeft[row][col]);
+                friendlypanelRight.add(friendlyPanelButtonsRight[row][col]);
 
             }
         }
    
-        getContentPane().add(friendlyBoatsPanel, BorderLayout.WEST);
-        getContentPane().add(botGuessPanel, BorderLayout.EAST);
+        getContentPane().add(friendlypanelLeft, BorderLayout.SOUTH);
+        getContentPane().add(friendlypanelRight, BorderLayout.NORTH);
 
         pack();
         setLocationRelativeTo(null);
@@ -132,11 +132,11 @@ public class playerBoard extends JFrame {
     }
 
     public JButton[][] getFriendlyBoardButtons() {
-        return friendlyBoatsButtons;
+        return friendlyPanelButtonsLeft;
     }
 
     public JButton[][] getBotBoardButtons() {
-        return botGuessButtons;
+        return friendlyPanelButtonsRight;
     }
     
     public int[] getUserInput(){

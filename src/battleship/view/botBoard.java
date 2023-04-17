@@ -21,11 +21,11 @@ public class botBoard extends JFrame {
     
     public JMenuBar menuBar = new JMenuBar();
 
-    private JPanel botBoatsPanel;
-    private JPanel friendlyGuessPanel;
+    private JPanel botPanelLeft;
+    private JPanel botPanelRight;
     
-    public static JButton[][] botBoatsButtons;
-    public static JButton[][] friendlyGuessButtons;
+    public static JButton[][] botPanelButtonsLeft;
+    public static JButton[][] botPanelButtonsRight;
     
     public botBoard() {
 
@@ -34,40 +34,40 @@ public class botBoard extends JFrame {
         
         //Create the GameBoard GUI, a 10x10 grid to play on that 
         //Displays both the bot and user boards.
-        botBoatsPanel = new JPanel();
-        botBoatsPanel.setLayout(new GridLayout(10, 10, 0, 0)); //set grid dimensions
-        botBoatsPanel.setPreferredSize(new Dimension(400, 400)); // Set preferred size
+        botPanelLeft = new JPanel();
+        botPanelLeft.setLayout(new GridLayout(10, 10, 0, 0)); //set grid dimensions
+        botPanelLeft.setPreferredSize(new Dimension(400, 400)); // Set preferred size
         
-        botBoatsButtons = new JButton[10][10];
+        botPanelButtonsLeft = new JButton[10][10];
         
-        friendlyGuessPanel = new JPanel();
-        friendlyGuessPanel.setLayout(new GridLayout(10, 10, 0, 0));
-        friendlyGuessPanel.setPreferredSize(new Dimension(400, 400)); // Set preferred size
+        botPanelRight = new JPanel();
+        botPanelRight.setLayout(new GridLayout(10, 10, 0, 0));
+        botPanelRight.setPreferredSize(new Dimension(400, 400)); // Set preferred size
         
-        friendlyGuessButtons = new JButton[10][10];
+        botPanelButtonsRight = new JButton[10][10];
 
         // Add buttons to friendlyBoatsPanel and botGuessPanel
         Font font = new Font("Arial", Font.BOLD, 12);
         for (int row = 0; row < 10; row++) {
             for (int col = 0; col < 10; col++) {
-                botBoatsButtons[row][col] = new JButton();
-                friendlyGuessButtons[row][col] = new JButton();
-                botBoatsButtons[row][col].setEnabled(false);
-                friendlyGuessButtons[row][col].setEnabled(false);
+                botPanelButtonsLeft[row][col] = new JButton();
+                botPanelButtonsRight[row][col] = new JButton();
+                botPanelButtonsLeft[row][col].setEnabled(false);
+                botPanelButtonsRight[row][col].setEnabled(false);
                 
-                botBoatsButtons[row][col].setFont(font);
-                friendlyGuessButtons[row][col].setFont(font);
+                botPanelButtonsLeft[row][col].setFont(font);
+                botPanelButtonsRight[row][col].setFont(font);
                 
                 MouseListener mouseAdapter = null;
-                botBoatsButtons[row][col].addMouseListener(mouseAdapter);
+                botPanelButtonsLeft[row][col].addMouseListener(mouseAdapter);
                 
-                botBoatsPanel.add(botBoatsButtons[row][col]);
-                friendlyGuessPanel.add(friendlyGuessButtons[row][col]);
+                botPanelLeft.add(botPanelButtonsLeft[row][col]);
+                botPanelRight.add(botPanelButtonsRight[row][col]);
             }
         }
    
-        getContentPane().add(botBoatsPanel, BorderLayout.WEST);
-        getContentPane().add(friendlyGuessPanel, BorderLayout.EAST);
+        getContentPane().add(botPanelLeft, BorderLayout.WEST);
+        getContentPane().add(botPanelRight, BorderLayout.EAST);
 
         pack();
         setLocationRelativeTo(null);
@@ -83,11 +83,11 @@ public class botBoard extends JFrame {
     }
     
     public JButton[][] getFriendlyBoardButtons() {
-        return botBoatsButtons;
+        return botPanelButtonsLeft;
     }
 
     public JButton[][] getBotBoardButtons() {
-        return friendlyGuessButtons;
+        return botPanelButtonsRight;
     }
     
     
