@@ -93,7 +93,6 @@ public class FriendlyBoard {
         Submarine newSubmarine = new Submarine();
         Destroyer newDestroyer = new Destroyer();
         
-        
         // Randomly each ship on the board until it fits
         while (placeShip(newCarrier) == false)
             newCarrier.randomizeLocation();   
@@ -109,6 +108,60 @@ public class FriendlyBoard {
         
         while (placeShip(newDestroyer) == false)
             newDestroyer.randomizeLocation();
+    }
+    
+    public void playerPlaceShips(playerBoard corresponding_button_panel)
+    {
+        // First, clear the board
+        resetBoard();
+        
+        // Declare holding variables for new ships
+        Carrier newCarrier = new Carrier(-1,-1,false);
+        BattleShip newBattleship = new BattleShip(-1,-1,false);
+        Cruiser newCruiser = new Cruiser(-1,-1,false);
+        Submarine newSubmarine = new Submarine(-1,-1,false);
+        Destroyer newDestroyer = new Destroyer(-1,-1,false);
+        
+        //Get user input until it's valid
+        System.out.println("Select a coordinate for your carrier.");
+        newCarrier.setLocation(corresponding_button_panel.getUserInput());
+        while (placeShip(newCarrier) == false){
+            System.out.println("Try again.");
+            newCarrier.setLocation(corresponding_button_panel.getUserInput());
+        }
+        updateBoatButtons();
+        System.out.println("Select a coordinate for your battleship.");
+        newBattleship.setLocation(corresponding_button_panel.getUserInput());
+        while (placeShip(newBattleship) == false){
+            System.out.println("Try again.");
+            newBattleship.setLocation(corresponding_button_panel.getUserInput());
+        }
+        updateBoatButtons();
+        
+        System.out.println("Select a coordinate for your cruiser.");
+        newCruiser.setLocation(corresponding_button_panel.getUserInput());
+        while (placeShip(newCruiser) == false){
+            System.out.println("Try again.");
+            newCruiser.setLocation(corresponding_button_panel.getUserInput());
+        }
+        updateBoatButtons();
+        
+        System.out.println("Select a coordinate for your submarine.");
+        newSubmarine.setLocation(corresponding_button_panel.getUserInput());
+        while (placeShip(newSubmarine) == false){
+            System.out.println("Try again.");
+            newSubmarine.setLocation(corresponding_button_panel.getUserInput());
+        }
+        updateBoatButtons();
+        
+        System.out.println("Select a coordinate for your destroyer.");
+        newDestroyer.setLocation(corresponding_button_panel.getUserInput());
+        while (placeShip(newDestroyer) == false){
+            System.out.println("Try again.");
+            newDestroyer.setLocation(corresponding_button_panel.getUserInput());
+        }
+        updateBoatButtons();
+        System.out.println("All boats placed!");
     }
     
     

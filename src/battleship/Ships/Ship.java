@@ -48,4 +48,11 @@ public abstract class Ship {
         
         
     }
+    public void setLocation(int[] coordinate){
+        x = coordinate[0];
+        y = coordinate[1];
+        System.out.println("Carrier set position to:");
+        System.out.println(x);
+        System.out.println(y);
+    }
 }

@@ -43,6 +43,7 @@ public class botBoard extends JFrame {
         friendlyGuessPanel = new JPanel();
         friendlyGuessPanel.setLayout(new GridLayout(10, 10, 0, 0));
         friendlyGuessPanel.setPreferredSize(new Dimension(400, 400)); // Set preferred size
+        
         friendlyGuessButtons = new JButton[10][10];
 
         // Add buttons to friendlyBoatsPanel and botGuessPanel
