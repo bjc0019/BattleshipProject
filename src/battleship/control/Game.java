@@ -8,47 +8,63 @@ import java.util.concurrent.Semaphore;
 
 
 public class Game {
+
     // ******************************************************************************************************************
     // Variables
     // ******************************************************************************************************************
-    private Semaphore playgameSemaphore = new Semaphore(0); // a semaphore to prevent the code from executing any further until play game is pressed in menuBoard
-    private FriendlyBoard playerShipBoard = new FriendlyBoard();
-    private OpponentBoard playerGuessBoard = new OpponentBoard();
-
-    private FriendlyBoard botShipBoard = new FriendlyBoard();
-    private OpponentBoard botGuessBoard = new OpponentBoard();
-
+    
+    /** Length and width of the board. */
+    public static final int BOARD_SIZE = 10;
+    
+    /** Number of hits needed to win the game. */
+    private static final int HITS_TO_WIN =17;
+    
+    // a semaphore to prevent the code from executing any further until play game is pressed in menuBoard
+    private final Semaphore playgameSemaphore = new Semaphore(0); 
+    
+    // Player boards
+    private final FriendlyBoard playerShipBoard = new FriendlyBoard();
+    private final OpponentBoard playerGuessBoard = new OpponentBoard();
+    
+    // Bot boards
+    private final FriendlyBoard botShipBoard = new FriendlyBoard();
+    private final OpponentBoard botGuessBoard = new OpponentBoard();
+    
+    // Some variables needed to calculate win states and get user input
     private int playerHits = 0, botHits = 0;
     private int[] coordinate;
 
-    private final int hitsToWin = 17;
-
-    private menuBoard launch_menu = new menuBoard(playgameSemaphore);
-
-    private playerBoard launchPlayerView = new playerBoard();
-    private botBoard launchBotView = new botBoard();
+    // GUI boards 
+    private final menuBoard launch_menu = new menuBoard(playgameSemaphore);
+    private final playerBoard launchPlayerView = new playerBoard();
+    private final botBoard launchBotView = new botBoard();
     
     
     // ******************************************************************************************************************
     // Methods
     // ******************************************************************************************************************
  
-    /** Main Entry point for our game program.      */
-    public void startGame()
+    /** Main Entry point for our game program.
+     * @return true to restart game, false to quit. */
+    public boolean startGame()
     {
         //we don't need to see the bot's board.
         launchBotView.setVisible(false);
+        
+        // Now that the player has selected "Play", dispose of the main menu
+        launch_menu.dispose();
 
        // Allow the player to initialize their board and create the opponents
         playerShipBoard.playerPlaceShips(launchPlayerView);
         botShipBoard.randomizeBoard();          // Randomize opponent board  
+        
+        launch_menu.dispose();
+        //JComponent comp = (JComponent) e.getSource();
+        //Window win = SwingUtilities.getWindowAncestor(comp);
+        //win.dispose();
 
         // Start gameplay loop, guessing back and forth
         while(true) {
-            // Update the boards with the player's guess, and generate one from the bot
-            // First, process the player
-            coordinate = launchPlayerView.getUserInput();
-            
             // Update board states with the player's guess 
             this.processTurn();
             
@@ -57,33 +73,40 @@ public class Game {
             playerGuessBoard.updateGuessButtons(); // This is the top board on the player's screen that shows where the bot has guessed 
 
             // Print the board, and check to see if the game is over
-            if(playerHits >= hitsToWin) {
+            if(playerHits >= HITS_TO_WIN) {
                 System.out.println("Player won:");
+                launchPlayerView.dispose();
                 break;
             }
-            if(botHits >= hitsToWin) {
+            if(botHits >= HITS_TO_WIN) {
                 System.out.println("Player won:");
                 break;
             }
 
         }
-       System.out.println("END of CODE:");
+        
+        // TODO: Add endgame screen that prints stats
+       return true;
     }
-    
     
     /** Function that handles all the board logic when a user guesses on the board */
     private void processTurn()
     {
-            if(botShipBoard.getTile(coordinate[0], coordinate[1]) != 'E') {   // If the player has a hit
+        // First, get input from the user and make sure it's not a square they've guessed before
+        do {
+        coordinate = launchPlayerView.getUserInput();
+        } while(!(playerGuessBoard.getTile(coordinate[0], coordinate[1]) == 'E'));
+        
+            // If the player has a hit, and hasn't guessed that tile yet
+            if(botShipBoard.getTile(coordinate[0], coordinate[1]) != 'E') {
                 playerGuessBoard.updateBoard(coordinate[0], coordinate[1], 'H');
                 playerHits++;
             }
             else 
                 playerGuessBoard.updateBoard(coordinate[0], coordinate[1], 'M');
 
-            // Next, the bot
+            // Next, the bot. The bot won't guess the same square twice
             coordinate = botGuessBoard.generateGuess();
-
             if(playerShipBoard.getTile(coordinate[0], coordinate[1]) != 'E') {
                 botGuessBoard.updateBoard(coordinate[0], coordinate[1], 'H');
                 botHits++;
