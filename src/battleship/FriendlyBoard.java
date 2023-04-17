@@ -1,6 +1,5 @@
 package battleship;
 import battleship.Ships.*;
-import myExceptions.*;
 import battleship.view.*;
 
 

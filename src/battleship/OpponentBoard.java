@@ -6,7 +6,6 @@ import battleship.view.playerBoard;
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Random;
-import myExceptions.*;
 
 /**
  *
