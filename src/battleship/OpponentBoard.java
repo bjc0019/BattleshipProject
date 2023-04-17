@@ -104,7 +104,7 @@ public class OpponentBoard {
             for(int j = 0; j < BOARD_SIZE; j++) {
                 try {
                     if (this.getTile(j, BOARD_SIZE - 1 - i) == 'E')
-                        playerBoard.friendlyPanelButtonsRight[i][j].setText("BB");
+                        playerBoard.friendlyPanelButtonsRight[i][j].setText(" ");
                     else
                         playerBoard.friendlyPanelButtonsRight[i][j].setText(Character.toString(this.getTile(j, BOARD_SIZE - 1 - i)));
                 }
