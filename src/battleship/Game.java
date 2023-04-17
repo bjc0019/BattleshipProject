@@ -5,6 +5,8 @@ import myExceptions.IndexOutOfBounds;
 import terminalGUI.debugGUI;
 import battleship.view.*; 
 import java.util.concurrent.Semaphore;
+
+
 public class Game {
     public static void main(String[] args) {
 
@@ -27,24 +29,7 @@ public class Game {
             botBoard launchBotView = new botBoard();
             //we don't need to see the bot's board.
             launchBotView.setVisible(false);
-        //while(true) {
-            /*
-            Carrier carrier = new Carrier(2,1,true);
-            BattleShip battleship = new BattleShip(1,1,true);
-            Submarine submarine = new Submarine(4,4,true);
-            Cruiser cruiser = new Cruiser(4,3, false);
-            Destroyer destroyer = new Destroyer(7,6,true);
-            */
-            
-            //debugGUI gui = debugGUI.getInstance();
-            //gui.placeShips(fboard);
-           // gui.printBoard(playerShipBoard, playerGuessBoard);
 
-
-            // Get user input from main menu, and quit if that's what's selected
-            //String userInput = gui.printMainMenu();
-            //if(Objects.equals(userInput, "quit")) 
-             //   break;
             
            // Allow the player to initialize their board and create the opponents
             playerShipBoard.playerPlaceShips(launchPlayerView);
@@ -59,9 +44,6 @@ public class Game {
             
             // Start gameplay loop, guessing back and forth
             while(true) {
-            // Display the board and get a guess from the player
-            //gui.printBoard(playerShipBoard,playerGuessBoard);
-
             // Update the boards with the player's guess, and generate one from the bot
             try {
                 // First, process the player
@@ -90,10 +72,10 @@ public class Game {
             }
             
             playerShipBoard.updateBoatButtons(); // This is the left board on the player's screen that shows the player's board
-            botGuessBoard.updateBoatButtons(); // This is the right board on the player's screen that shows where the bot has guessed 
+            playerGuessBoard.updateGuessButtons(); // This is the right board on the player's screen that shows where the bot has guessed 
             
-            botShipBoard.updateGuessButtons(); //Right side of Bot screen
-            botGuessBoard.updateGuessButtons();
+            //botShipBoard.updateGuessButtons(); //Right side of Bot screen
+            //botGuessBoard.updateGuessButtons();
            
             // Print the board, and check to see if the game is over
             //gui.printBoard(playerShipBoard, playerGuessBoard);
