@@ -7,7 +7,6 @@ import battleship.view.playerBoard;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.Scanner;
-import myExceptions.IndexOutOfBounds;
 import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
@@ -97,17 +96,11 @@ public class debugGUI {
         // Print Opponent Board first
         for(int i = 0; i < BOARD_SIZE; i++) {
             for(int j = 0; j < BOARD_SIZE; j++) 
-                try {
-                    if (_oboard.getTile(j, BOARD_SIZE - 1 - i) == 'E')
-                        System.out.print(" ");
-                    else
-                        System.out.print(_oboard.getTile(j, BOARD_SIZE - 1 - i));
-                    System.out.print(", ");
-                }
-                catch(IndexOutOfBounds ex) {
-                    System.out.println("Error printing opponent board to the terminal: " + ex.getMessage());
-                    System.exit(1);
-                }
+                if (_oboard.getTile(j, BOARD_SIZE - 1 - i) == 'E')
+                    System.out.print(" ");
+                else
+                    System.out.print(_oboard.getTile(j, BOARD_SIZE - 1 - i));
+                System.out.print(", ");
                         
             System.out.println("");
         }
@@ -118,18 +111,13 @@ public class debugGUI {
         
         // Print friendly board on the bottom
         for(int i = 0; i < BOARD_SIZE; i++) {
-            for(int j = 0; j < BOARD_SIZE; j++) 
-                try {
-                    if (_fboard.getTile(j, BOARD_SIZE - 1 - i) == 'E')
-                        System.out.print(" ");
-                    else
-                        System.out.print(_fboard.getTile(j, BOARD_SIZE - 1 - i));
-                    System.out.print(", ");
-                }
-                catch(IndexOutOfBounds ex) {
-                    System.out.println("Error printing friendly board to the terminal: " + ex.getMessage());
-                    System.exit(1);
-                }
+            for(int j = 0; j < BOARD_SIZE; j++)
+                if (_fboard.getTile(j, BOARD_SIZE - 1 - i) == 'E')
+                    System.out.print(" ");
+                else
+                    System.out.print(_fboard.getTile(j, BOARD_SIZE - 1 - i));
+                System.out.print(", ");
+                
                         
             System.out.println("");
         }

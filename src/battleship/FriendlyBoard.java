@@ -50,14 +50,13 @@ public class FriendlyBoard {
      @return char 'E' (empty), 'A'(Aircraft Carrier), 'B'(Battleship), 'S'(Submarine), 'C'(Cruiser), or 'D'(Destroyer) 
      @param x x coordinate on the board, starting at 0 index
      @param y y coordinate on the board, starting at 0 index
-     @throws IndexOutOfBounds exception if either x or y is not within the board
      */
-    public char getTile(int x, int y) throws IndexOutOfBounds
+    public char getTile(int x, int y)
     {
         if (x < BOARD_SIZE && y < BOARD_SIZE && x >= 0 && y >= 0)
             return board[(x)][y];
         else
-            throw new IndexOutOfBounds("Invalid x,y pair (" + x + ", " + y + ')');
+            throw new IllegalArgumentException("Invalid x,y pair (" + x + ", " + y + ')');
     }
     
     
@@ -170,16 +169,10 @@ public class FriendlyBoard {
     public void updateBoatButtons() { 
         for(int i = 0; i < BOARD_SIZE; i++) {
             for(int j = 0; j < BOARD_SIZE; j++) {
-                try {
-                    if (this.getTile(j, BOARD_SIZE - 1 - i) == 'E')
-                        playerBoard.friendlyPanelButtonsLeft[i][j].setText(" ");
-                    else
-                        playerBoard.friendlyPanelButtonsLeft[i][j].setText(Character.toString(this.getTile(j, BOARD_SIZE - 1 - i)));
-                }
-                catch(IndexOutOfBounds ex) {
-                    System.out.println("Error updating board buttons: " + ex.getMessage());
-                    System.exit(1);
-                }
+                if (this.getTile(j, BOARD_SIZE - 1 - i) == 'E')
+                    playerBoard.friendlyPanelButtonsLeft[i][j].setText(" ");
+                else
+                    playerBoard.friendlyPanelButtonsLeft[i][j].setText(Character.toString(this.getTile(j, BOARD_SIZE - 1 - i)));
             }
         }
     }
@@ -272,14 +265,13 @@ public class FriendlyBoard {
      @param _x x coordinate on the board, starting at 0 index
      @param _y y coordinate on the board, starting at 0 index
      @param _input char that gets put in the board
-     @throws IndexOutOfBounds exception if either x or y is not within the board
      */
-    private void setTile(int _x, int _y, char _input) throws IndexOutOfBounds
+    private void setTile(int _x, int _y, char _input)
     {
         if (_x < BOARD_SIZE && _y < BOARD_SIZE && _x >= 0 && _y >= 0)
             board[_x][_y] = _input;
         else
-            throw new myExceptions.IndexOutOfBounds("Invalid (x,y) pair (" + _x + ", " + _y + ')');
+            throw new IllegalArgumentException("Invalid (x,y) pair (" + _x + ", " + _y + ')');
     }
     
     

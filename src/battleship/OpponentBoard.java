@@ -66,20 +66,19 @@ public class OpponentBoard {
     
     /** 
      * Updates board with a new guess. _newGuess char is placed at (x,y) on the board
-     * @throws IndexOutOfBounds If x or y are not in the board, or char is an invalid value, throws this exception
      * @param _x X coordinate of updated point
      * @param _y Y coordinate of updated point
      * @param _newGuess char to be placed on the board at (x,y)
      */
-    public void updateBoard(int _x, int _y, char _newGuess) throws IndexOutOfBounds
+    public void updateBoard(int _x, int _y, char _newGuess)
     {
         // Make sure input is in the specified range
         if(_x < 0 && _y < 0)
-            throw new IndexOutOfBounds(String.format("Either x value %d or y value %d is less than 0", _x, _y));
+            throw new IllegalArgumentException(String.format("Either x value %d or y value %d is less than 0", _x, _y));
         if(_x > BOARD_SIZE || _y > BOARD_SIZE)
-            throw new IndexOutOfBounds(String.format("Either x: %d or y: %d is larger than board size %d", _x, _y, BOARD_SIZE));
+            throw new IllegalArgumentException(String.format("Either x: %d or y: %d is larger than board size %d", _x, _y, BOARD_SIZE));
         if(_newGuess != 'H' && _newGuess != 'M')
-            throw new IndexOutOfBounds(String.format("Char input %c is not 'H' or 'M'", _newGuess));
+            throw new IllegalArgumentException(String.format("Char input %c is not 'H' or 'M'", _newGuess));
         
         // Update board with new value
         board[_x][_y] = _newGuess;
@@ -102,16 +101,10 @@ public class OpponentBoard {
     public void updateGuessButtons() {
         for(int i = 0; i < BOARD_SIZE; i++) {
             for(int j = 0; j < BOARD_SIZE; j++) {
-                try {
-                    if (this.getTile(j, BOARD_SIZE - 1 - i) == 'E')
-                        playerBoard.friendlyPanelButtonsRight[i][j].setText(" ");
-                    else
-                        playerBoard.friendlyPanelButtonsRight[i][j].setText(Character.toString(this.getTile(j, BOARD_SIZE - 1 - i)));
-                }
-                catch(IndexOutOfBounds ex) {
-                    System.out.println("Error updating board buttons: " + ex.getMessage());
-                    System.exit(1);
-                }
+                if (this.getTile(j, BOARD_SIZE - 1 - i) == 'E')
+                    playerBoard.friendlyPanelButtonsRight[i][j].setText(" ");
+                else
+                    playerBoard.friendlyPanelButtonsRight[i][j].setText(Character.toString(this.getTile(j, BOARD_SIZE - 1 - i)));
             }
         }
     }  
@@ -158,14 +151,13 @@ public class OpponentBoard {
      * @param _x 0 Indexed x coordinate 
      * @param _y 0 Indexed y coordinate
      * @return Char value at x,y on the board
-     * @throws IndexOutOfBounds if x or y aren't between 0-9
      */
-    public char getTile(int _x, int _y) throws IndexOutOfBounds
+    public char getTile(int _x, int _y)
     {
         if (_x < BOARD_SIZE && _y < BOARD_SIZE && _x >= 0 && _y >= 0)
             return board[_x][_y];
         else
-            throw new IndexOutOfBounds("Invalid x,y pair (" + _x + ", " + _y + ')');
+            throw new IllegalArgumentException("Invalid x,y pair (" + _x + ", " + _y + ')');
     }
     
     
