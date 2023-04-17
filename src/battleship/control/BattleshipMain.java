@@ -1,16 +1,11 @@
-package battleship;
+package battleship.control;
 
-import static java.lang.System.exit;
+import battleship.control.Game;
 
-/**
- *
- * @author bcalv
- */
 public class BattleshipMain {
     public static void main(String[] args)
     {
         Game theGame = new Game();
         theGame.startGame();
-
     }
 }

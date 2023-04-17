@@ -1,6 +1,7 @@
-package battleship;
+package battleship.model;
 
-import static battleship.FriendlyBoard.BOARD_SIZE;
+import battleship.model.FriendlyBoard;
+import static battleship.model.FriendlyBoard.BOARD_SIZE;
 import battleship.view.botBoard;
 import battleship.view.playerBoard;
 import java.awt.Color;
@@ -37,7 +38,7 @@ public class OpponentBoard {
     // ******************************************************************************************************************
     
     /** Default constructor initializes board to empty. */
-    OpponentBoard()
+    public OpponentBoard()
     {
         // Initialize hit/miss variables
         numHits = 0;

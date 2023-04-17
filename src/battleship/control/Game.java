@@ -1,4 +1,6 @@
-package battleship;
+package battleship.control;
+import battleship.model.OpponentBoard;
+import battleship.model.FriendlyBoard;
 import java.util.Objects;
 import java.util.Random;
 import battleship.view.*; 
@@ -30,7 +32,7 @@ public class Game {
     // ******************************************************************************************************************
     // Methods
     // ******************************************************************************************************************
-    
+ 
     /** Main Entry point for our game program.      */
     public void startGame()
     {
@@ -66,7 +68,6 @@ public class Game {
 
         }
        System.out.println("END of CODE:");
-    //}
     }
     
     

@@ -1,4 +1,4 @@
-package battleship.Ships;
+package battleship.model.ships;
 
 public class BattleShip extends Ship {
     public BattleShip(int _x, int _y, boolean _isVertical)

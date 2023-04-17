@@ -1,7 +1,7 @@
-package battleship.Ships;
+package battleship.model.ships;
 
 import java.util.Random;
-import battleship.FriendlyBoard;
+import battleship.model.FriendlyBoard;
 
 /** 
  * Superclass for the ship classes.

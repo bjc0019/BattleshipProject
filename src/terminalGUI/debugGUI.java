@@ -1,8 +1,14 @@
 package terminalGUI;
 
-import battleship.*;
-import static battleship.FriendlyBoard.BOARD_SIZE;
-import battleship.Ships.*;
+import battleship.model.ships.Ship;
+import battleship.model.ships.BattleShip;
+import battleship.model.ships.Submarine;
+import battleship.model.ships.Carrier;
+import battleship.model.ships.Cruiser;
+import battleship.model.ships.Destroyer;
+import battleship.model.OpponentBoard;
+import battleship.model.FriendlyBoard;
+import static battleship.model.FriendlyBoard.BOARD_SIZE;
 import battleship.view.playerBoard;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;

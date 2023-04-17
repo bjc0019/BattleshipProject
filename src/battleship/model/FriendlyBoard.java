@@ -1,5 +1,10 @@
-package battleship;
-import battleship.Ships.*;
+package battleship.model;
+import battleship.model.ships.Ship;
+import battleship.model.ships.BattleShip;
+import battleship.model.ships.Submarine;
+import battleship.model.ships.Carrier;
+import battleship.model.ships.Cruiser;
+import battleship.model.ships.Destroyer;
 import battleship.view.*;
 
 

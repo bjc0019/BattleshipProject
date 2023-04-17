@@ -8,7 +8,7 @@ package battleship.view;
  *
  * @author joshpohly
  */
-import battleship.FriendlyBoard;
+import battleship.model.FriendlyBoard;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
