@@ -184,23 +184,7 @@ public class FriendlyBoard {
         }
     }
    
-// Currently printing Opponent Boats
-    public void updateGuessButtons() {
-        for(int i = 0; i < BOARD_SIZE; i++) {
-            for(int j = 0; j < BOARD_SIZE; j++) {
-                try {
-                    if (this.getTile(j, BOARD_SIZE - 1 - i) == 'E')
-                        playerBoard.friendlyPanelButtonsRight[i][j].setText("BB");
-                    else
-                        playerBoard.friendlyPanelButtonsRight[i][j].setText(Character.toString(this.getTile(j, BOARD_SIZE - 1 - i)));
-                }
-                catch(IndexOutOfBounds ex) {
-                    System.out.println("Error updating board buttons: " + ex.getMessage());
-                    System.exit(1);
-                }
-            }
-        }
-    }
+
     
     //private playerBoard thisGUI; // Add playerBoard member variable
     

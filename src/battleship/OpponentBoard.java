@@ -54,6 +54,7 @@ public class OpponentBoard {
         // Initialize array of points to guess
         pointsToGuess = new ArrayList<int[]>();
         
+        // Populate all the coordinate pairs which can be guessed
         for(int i = 0; i < BOARD_SIZE; i++)
             for(int j = 0; j < BOARD_SIZE; j++)
                 pointsToGuess.add(new int[]{i,j});
@@ -96,31 +97,16 @@ public class OpponentBoard {
             accuracy = numHits / (numHits + numMisses) * 100;
     }
     
-     public void updateBoatButtons() {
-        for(int i = 0; i < BOARD_SIZE; i++) {
-            for(int j = 0; j < BOARD_SIZE; j++) {
-                try {
-                    if (this.getTile(j, BOARD_SIZE - 1 - i) == 'E')
-                        botBoard.botPanelButtonsLeft[i][j].setText("OB");
-                    else
-                        botBoard.botPanelButtonsLeft[i][j].setText(Character.toString(this.getTile(j, BOARD_SIZE - 1 - i)));
-                }
-                catch(IndexOutOfBounds ex) {
-                    System.out.println("Error updating board buttons: " + ex.getMessage());
-                    System.exit(1);
-                }
-            }
-        }
-    }
      
+// Currently printing Opponent Boats
     public void updateGuessButtons() {
         for(int i = 0; i < BOARD_SIZE; i++) {
             for(int j = 0; j < BOARD_SIZE; j++) {
                 try {
                     if (this.getTile(j, BOARD_SIZE - 1 - i) == 'E')
-                        botBoard.botPanelButtonsRight[i][j].setText(" ");
+                        playerBoard.friendlyPanelButtonsRight[i][j].setText("BB");
                     else
-                        botBoard.botPanelButtonsRight[i][j].setText(Character.toString(this.getTile(j, BOARD_SIZE - 1 - i)));
+                        playerBoard.friendlyPanelButtonsRight[i][j].setText(Character.toString(this.getTile(j, BOARD_SIZE - 1 - i)));
                 }
                 catch(IndexOutOfBounds ex) {
                     System.out.println("Error updating board buttons: " + ex.getMessage());
@@ -128,7 +114,7 @@ public class OpponentBoard {
                 }
             }
         }
-    }    
+    }  
        
  
     
