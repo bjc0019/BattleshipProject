@@ -126,45 +126,56 @@ public class FriendlyBoard {
         Destroyer newDestroyer = new Destroyer(-1,-1,false);
         
         //Get user input until it's valid
-        System.out.println("Select a coordinate for your carrier.");
+        this.setMessageBoard("Select a coordinate for your carrier."+'\n');
+        System.out.println("Select a coordinate for your carrier."+'\n');
         newCarrier.setLocation(corresponding_button_panel.getUserInput());
         while (placeShip(newCarrier) == false){
-            System.out.println("Try again.");
+            this.setMessageBoard("Try again."+'\n');
+            System.out.println("Try again."+'\n');
             newCarrier.setLocation(corresponding_button_panel.getUserInput());
         }
         updateBoatButtons();
-        System.out.println("Select a coordinate for your battleship.");
+        this.setMessageBoard("Select a coordinate for your battleship."+'\n');
+        System.out.println("Select a coordinate for your battleship."+'\n');
         newBattleship.setLocation(corresponding_button_panel.getUserInput());
         while (placeShip(newBattleship) == false){
-            System.out.println("Try again.");
+            this.setMessageBoard("Try again."+'\n');
+            System.out.println("Try again."+'\n');
             newBattleship.setLocation(corresponding_button_panel.getUserInput());
         }
         updateBoatButtons();
         
-        System.out.println("Select a coordinate for your cruiser.");
+        this.setMessageBoard("Select a coordinate for your cruiser."+'\n');
+        System.out.println("Select a coordinate for your cruiser."+'\n');
         newCruiser.setLocation(corresponding_button_panel.getUserInput());
         while (placeShip(newCruiser) == false){
-            System.out.println("Try again.");
+            this.setMessageBoard("Try again."+'\n');
+            System.out.println("Try again."+'\n');
             newCruiser.setLocation(corresponding_button_panel.getUserInput());
         }
         updateBoatButtons();
         
-        System.out.println("Select a coordinate for your submarine.");
+        this.setMessageBoard("Select a coordinate for your submarine."+'\n');
+        System.out.println("Select a coordinate for your submarine."+'\n');
         newSubmarine.setLocation(corresponding_button_panel.getUserInput());
         while (placeShip(newSubmarine) == false){
-            System.out.println("Try again.");
+            this.setMessageBoard("Try again."+'\n');
+            System.out.println("Try again."+'\n');
             newSubmarine.setLocation(corresponding_button_panel.getUserInput());
         }
         updateBoatButtons();
         
-        System.out.println("Select a coordinate for your destroyer.");
+        this.setMessageBoard("Select a coordinate for your destroyer."+'\n');
+        System.out.println("Select a coordinate for your destroyer."+'\n');
         newDestroyer.setLocation(corresponding_button_panel.getUserInput());
         while (placeShip(newDestroyer) == false){
+            this.setMessageBoard("Try again."+'\n');
             System.out.println("Try again.");
             newDestroyer.setLocation(corresponding_button_panel.getUserInput());
         }
         updateBoatButtons();
-        System.out.println("All boats placed!");
+        this.setMessageBoard("All boats placed" +'\n');
+        System.out.println("All boats placed!"+'\n');
     }
     
     
@@ -336,5 +347,10 @@ public class FriendlyBoard {
         destroyer = null;
         
     }
+    
+    public void setMessageBoard(String stringArgument){
+        playerBoard.textArea.append(stringArgument);  
+    }
+
 }
 

@@ -64,10 +64,12 @@ public class Game {
         //win.dispose();
 
         // Start gameplay loop, guessing back and forth
+        
         while(true) {
             // Update board states with the player's guess 
+            playerShipBoard.setMessageBoard("Player's turn to guess."+'\n');
             this.processTurn();
-            
+            playerShipBoard.setMessageBoard("Bot's turn to guess."+'\n');
             // Redraw the boat and guess board in the GUI
             playerShipBoard.updateBoatButtons(); // This is the bottom board on the player's screen that shows the player's board
             playerGuessBoard.updateGuessButtons(); // This is the top board on the player's screen that shows where the bot has guessed 
@@ -79,7 +81,7 @@ public class Game {
                 break;
             }
             if(botHits >= HITS_TO_WIN) {
-                System.out.println("Player won:");
+                System.out.println("Bot won:");
                 break;
             }
 

@@ -33,6 +33,8 @@ public class playerBoard extends JFrame {
     private JPanel friendlypanelRight;
     private Semaphore currentSemaphore;
     
+    public static JTextArea textArea = new JTextArea(10, 30);
+    
     public static JButton[][] friendlyPanelButtonsLeft;
     public static JButton[][] friendlyPanelButtonsRight;
     
@@ -93,12 +95,18 @@ public class playerBoard extends JFrame {
             }
         }
    
+        setJMenuBar(menuBar);
+        JScrollPane scrollPane = new JScrollPane(textArea);
+        
         getContentPane().add(friendlypanelLeft, BorderLayout.SOUTH);
         getContentPane().add(friendlypanelRight, BorderLayout.NORTH);
-
+        getContentPane().add(scrollPane, BorderLayout.CENTER);
+        
         pack();
         setLocationRelativeTo(null);
         setVisible(true);
+        
+        //Create the text aread
         
         //Create and the menu bar for the game.
         menu.add(saveMenuItem);
@@ -106,7 +114,8 @@ public class playerBoard extends JFrame {
         menu.add(homeMenuItem);
         menuBar.add(menu);
 
-        setJMenuBar(menuBar);
+        
+        
         
         JLabel friendlyBoardLabel = new JLabel("Player Board");
         friendlyBoardLabel.setHorizontalAlignment(JLabel.CENTER);
