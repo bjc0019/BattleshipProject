@@ -47,13 +47,13 @@ public class playerBoard extends JFrame {
         //displays both the bot and user boards.
         friendlypanelLeft = new JPanel();
         friendlypanelLeft.setLayout(new GridLayout(10, 10, 0, 0)); //set grid dimensions
-        friendlypanelLeft.setPreferredSize(new Dimension(250, 250)); // Set preferred size
+        friendlypanelLeft.setPreferredSize(new Dimension(450, 300)); // Set preferred size
         
         friendlyPanelButtonsLeft = new JButton[10][10];
         
         friendlypanelRight = new JPanel();
         friendlypanelRight.setLayout(new GridLayout(10, 10, 0, 0));
-        friendlypanelRight.setPreferredSize(new Dimension(250, 250)); // Set preferred size
+        friendlypanelRight.setPreferredSize(new Dimension(450, 300)); // Set preferred size
         
         friendlyPanelButtonsRight = new JButton[10][10];
 
