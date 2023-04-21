@@ -7,6 +7,7 @@ import battleship.view.*;
 import java.util.concurrent.Semaphore;
 
 
+
 public class Game {
 
     // ******************************************************************************************************************
@@ -21,7 +22,7 @@ public class Game {
     
     // a semaphore to prevent the code from executing any further until play game is pressed in menuBoard
     private final Semaphore playgameSemaphore = new Semaphore(0); 
-    
+    //private final Semaphore playgameSemaphore = new Semaphore(Integer.MAX_VALUE);
     // Player boards
     private final FriendlyBoard playerShipBoard = new FriendlyBoard();
     private final OpponentBoard playerGuessBoard = new OpponentBoard();
@@ -31,9 +32,11 @@ public class Game {
     private final OpponentBoard botGuessBoard = new OpponentBoard();
     
     // Some variables needed to calculate win states and get user input
-    private int playerHits = 0, botHits = 0;
+    
+    public static int playerHits = 0, botHits = 0;
     private int[] coordinate;
-
+    public static int playerScore;
+    
     // GUI boards 
     private final menuBoard launch_menu = new menuBoard(playgameSemaphore);
     private final playerBoard launchPlayerView = new playerBoard();
@@ -58,7 +61,7 @@ public class Game {
         playerShipBoard.playerPlaceShips(launchPlayerView);
         botShipBoard.randomizeBoard();          // Randomize opponent board  
         
-        launch_menu.dispose();
+        //launch_menu.dispose();
         //JComponent comp = (JComponent) e.getSource();
         //Window win = SwingUtilities.getWindowAncestor(comp);
         //win.dispose();
@@ -84,7 +87,6 @@ public class Game {
                 System.out.println("Bot won:");
                 break;
             }
-
         }
         
         // TODO: Add endgame screen that prints stats
@@ -96,6 +98,7 @@ public class Game {
     {
         // First, get input from the user and make sure it's not a square they've guessed before
         do {
+        this.updateScore();    
         coordinate = launchPlayerView.getUserInput();
         } while(!(playerGuessBoard.getTile(coordinate[0], coordinate[1]) == 'E'));
         
@@ -115,6 +118,14 @@ public class Game {
             }
             else
                 botGuessBoard.updateBoard(coordinate[0], coordinate[1], 'M');
+    }
+    
+    public void updateScore(){
+         playerScore = ((playerHits/83)*100);
+    }
+    
+    public static int getScore (){
+        return playerScore;
     }
 }
 

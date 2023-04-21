@@ -8,6 +8,7 @@ package battleship.view;
  *
  * @author joshpohly
  */
+import battleship.control.Game;
 import battleship.model.FriendlyBoard;
 import javax.swing.*;
 import java.awt.*;
@@ -20,6 +21,8 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.concurrent.Semaphore;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class playerBoard extends JFrame {
     
@@ -33,7 +36,7 @@ public class playerBoard extends JFrame {
     private JPanel friendlypanelLeft;
     private JPanel friendlypanelRight;
     private Semaphore currentSemaphore;
-       
+    
     public static JTextArea textArea = new JTextArea(10, 30);
     
     public static JButton[][] friendlyPanelButtonsLeft;
@@ -42,7 +45,7 @@ public class playerBoard extends JFrame {
     public playerBoard() {
 
         setTitle("BattleShip");
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         
         //Create the GameBoard GUI, a 10x10 grid to play on that 
         //displays both the bot and user boards.
@@ -106,9 +109,7 @@ public class playerBoard extends JFrame {
         pack();
         setLocationRelativeTo(null);
         setVisible(true);
-        
-        //Create the text aread
-        
+           
         //Create and the menu bar for the game.
         menu.add(saveMenuItem);
         menu.add(quitMenuItem);
@@ -124,21 +125,43 @@ public class playerBoard extends JFrame {
         
         // Menu -> Quit action listener
         quitMenuItem.addActionListener(e -> System.exit(0));
-
+       
         // Add action listener to save menu item
+        String timeStamp = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
         saveMenuItem.addActionListener(new ActionListener() {
-            @Override
             public void actionPerformed(ActionEvent e) {
-                try {
-                    FileWriter outFile = new FileWriter( "src/Files/battleship_score.txt", true);
-                    outFile.write("Add score here");
-                    outFile.close();
-                    JOptionPane.showMessageDialog(null, "Score saved!");
-                } catch (IOException ex) {
-                    ex.printStackTrace();
+                // Create a text field for the player name
+                JTextField playerNameField = new JTextField();
+                Object[] fields = {"Player Name:", playerNameField};
+
+                // Display a dialog box with the text field for the player name
+                int result = JOptionPane.showConfirmDialog(null, fields, "Enter Player Name", JOptionPane.OK_CANCEL_OPTION);
+
+                // Check if the user clicked "OK"
+                if (result == JOptionPane.OK_OPTION) {
+                    try {
+                        // Get the player name from the text field
+                        String playerName = playerNameField.getText();
+
+                        // Save the player name to the file
+                        FileWriter outFile = new FileWriter("src/Files/battleship_score.txt", true);
+                        outFile.write(playerName + ":  " + Game.getScore() + "  " + timeStamp +'\n');
+                        outFile.close();
+                        JOptionPane.showMessageDialog(null, "Score saved!");
+                    } catch (IOException ex) {
+                        ex.printStackTrace();
+                    }
                 }
             }
         });
+        
+        homeMenuItem.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+               dispose();
+               //menuBoard launchNewMenu = new menuBoard(playgameSemaphore);
+            }
+        });
+        
     }
 
     public JButton[][] getFriendlyBoardButtons() {

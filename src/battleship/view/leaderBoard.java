@@ -10,6 +10,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.concurrent.Semaphore;
@@ -28,54 +30,52 @@ public class leaderBoard extends JFrame{
     public JButton backButton = new JButton("Back");
 
     private JPanel leaderboardPanel;
-    private Semaphore currentSemaphore;
     
     public leaderBoard() {
 
         setTitle("BattleShip");
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         
         //Create the GameBoard GUI, a 10x10 grid to play on that 
         //displays both the bot and user boards.
         leaderboardPanel = new JPanel();
-        //leaderboardPanel.setLayout(new GridLayout(10, 10, 0, 0)); //set grid dimensions
-        leaderboardPanel.setPreferredSize(new Dimension(550, 550)); // Set preferred size
-        //fileWindow.setBounds(50, 50, 200, 200);
+        leaderboardPanel.setPreferredSize(new Dimension(600, 550)); // Set preferred size
         leaderboardPanel.add(fileWindow);
-        leaderboardPanel.add(backButton);
+        
+        JButton backButton = new JButton("Back");
         
         getContentPane().add(leaderboardPanel, BorderLayout.NORTH);
-        //getContentPane().add(backButton, BorderLayout.SOUTH);
 
         pack();
         setLocationRelativeTo(null);
         setVisible(true);
         
-        //Create and the menu bar for the game.
-        menu.add(saveMenuItem);
-        menu.add(quitMenuItem);
-        menu.add(homeMenuItem);
-        menuBar.add(menu);
-
-        setJMenuBar(menuBar);
+        // Read contents of the file and display on leaderboardPanel
+        try {
+            BufferedReader reader = new BufferedReader(new FileReader("src/Files/battleship_score.txt"));
+            String line;
+            StringBuilder string = new StringBuilder();
+            while ((line = reader.readLine()) != null) {
+                string.append(line);
+                string.append(System.lineSeparator());
+            }
+            fileWindow.setText(string.toString());
+            reader.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         
-        JLabel friendlyBoardLabel = new JLabel("Player Board");
+        leaderboardPanel.add(backButton);
+
+        backButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+            }
+        });
+        
+        JLabel friendlyBoardLabel = new JLabel("Score Board");
         friendlyBoardLabel.setHorizontalAlignment(JLabel.CENTER);
         menuBar.add(friendlyBoardLabel);
         
-        // Menu -> Quit action listener
-        quitMenuItem.addActionListener(e -> System.exit(0));
     }
-    /*
-    public void getUserInput(){
-        // Use a semaphore to delay the execution until there's a response.
-        currentSemaphore = new Semaphore(0);
-        try{
-            currentSemaphore.acquire();
-        }
-        catch(InterruptedException e){
-            e.printStackTrace();
-        }
-    }
-    */
 }
