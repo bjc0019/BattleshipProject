@@ -16,6 +16,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.concurrent.Semaphore;
@@ -32,7 +33,7 @@ public class playerBoard extends JFrame {
     private JPanel friendlypanelLeft;
     private JPanel friendlypanelRight;
     private Semaphore currentSemaphore;
-    
+       
     public static JTextArea textArea = new JTextArea(10, 30);
     
     public static JButton[][] friendlyPanelButtonsLeft;
@@ -129,7 +130,7 @@ public class playerBoard extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
-                    FileWriter outFile = new FileWriter("battleship_score.txt", true);
+                    FileWriter outFile = new FileWriter( "src/Files/battleship_score.txt", true);
                     outFile.write("Add score here");
                     outFile.close();
                     JOptionPane.showMessageDialog(null, "Score saved!");
