@@ -45,7 +45,7 @@ public class menuBoard extends JFrame {
         
         leaderboardButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                // Code to show the leaderboard
+                leaderBoard launchLeaderBoard = new leaderBoard();
             }
         });
         
