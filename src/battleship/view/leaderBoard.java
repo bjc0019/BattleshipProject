@@ -26,7 +26,6 @@ public class leaderBoard extends JFrame{
     public JMenu menu = new JMenu("Menu");
     public JMenuItem saveMenuItem = new JMenuItem("Save");
     public JMenuItem quitMenuItem = new JMenuItem("Quit");
-    public JMenuItem homeMenuItem = new JMenuItem("Home");
     public JTextArea fileWindow = new JTextArea(30, 50);
     public JButton backButton = new JButton("Back");
 
@@ -40,8 +39,6 @@ public class leaderBoard extends JFrame{
         setTitle("BattleShip");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         
-        //Create the GameBoard GUI, a 10x10 grid to play on that 
-        //displays both the bot and user boards.
         leaderboardPanel = new JPanel();
         leaderboardPanel.setPreferredSize(new Dimension(600, 550)); // Set preferred size
         leaderboardPanel.add(fileWindow);

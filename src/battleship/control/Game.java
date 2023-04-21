@@ -4,7 +4,13 @@ import battleship.model.FriendlyBoard;
 import java.util.Objects;
 import java.util.Random;
 import battleship.view.*; 
+import java.io.FileWriter;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.concurrent.Semaphore;
+import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 
 
 
@@ -80,15 +86,70 @@ public class Game {
             // Redraw the boat and guess board in the GUI
             playerShipBoard.updateBoatButtons(); // This is the bottom board on the player's screen that shows the player's board
             playerGuessBoard.updateGuessButtons(); // This is the top board on the player's screen that shows where the bot has guessed 
-
+            
             // Print the board, and check to see if the game is over
             if(playerHits >= HITS_TO_WIN) {
-                System.out.println("Player won:");
                 launchPlayerView.dispose();
+                String message = String.format("Player wins! Hit accuracy: %f. Save game?",playerGuessBoard.getAccuracy());
+                int response = JOptionPane.showConfirmDialog(null, message, "Game over.", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+                if(response == JOptionPane.YES_OPTION){
+                    //Save the information.
+                    String timeStamp = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
+                    // Create a text field for the player name
+                    JTextField playerNameField = new JTextField();
+                    Object[] fields = {"Player Name:", playerNameField};
+
+                    // Display a dialog box with the text field for the player name
+                    int result = JOptionPane.showConfirmDialog(null, fields, "Enter Player Name", JOptionPane.OK_CANCEL_OPTION);
+
+                    // Check if the user clicked "OK"
+                    if (result == JOptionPane.OK_OPTION) {
+                        try {
+                            // Get the player name from the text field
+                            String playerName = playerNameField.getText();
+
+                            // Save the player name to the file
+                            FileWriter outFile = new FileWriter("src/Files/battleship_score.txt", true);
+                            outFile.write(playerName + ":  " + Game.getScore() + "  " + timeStamp +'\n');
+                            outFile.close();
+                            JOptionPane.showMessageDialog(null, "Score saved!");
+                        } catch (IOException ex) {
+                            ex.printStackTrace();
+                        }
+                    }
+                }
                 break;
             }
             if(botHits >= HITS_TO_WIN) {
-                System.out.println("Bot won:");
+                launchPlayerView.dispose();
+                String message = String.format("Bot wins! Hit accuracy: %f. Save game?",playerGuessBoard.getAccuracy());
+                int response = JOptionPane.showConfirmDialog(null, message, "Game over.", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+                if(response == JOptionPane.YES_OPTION){
+                    //Save the information.
+                    String timeStamp = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
+                    // Create a text field for the player name
+                    JTextField playerNameField = new JTextField();
+                    Object[] fields = {"Player Name:", playerNameField};
+
+                    // Display a dialog box with the text field for the player name
+                    int result = JOptionPane.showConfirmDialog(null, fields, "Enter Player Name", JOptionPane.OK_CANCEL_OPTION);
+
+                    // Check if the user clicked "OK"
+                    if (result == JOptionPane.OK_OPTION) {
+                        try {
+                            // Get the player name from the text field
+                            String playerName = playerNameField.getText();
+
+                            // Save the player name to the file
+                            FileWriter outFile = new FileWriter("src/Files/battleship_score.txt", true);
+                            outFile.write(playerName + ":  " + Game.getScore() + "  " + timeStamp +'\n');
+                            outFile.close();
+                            JOptionPane.showMessageDialog(null, "Score saved!");
+                        } catch (IOException ex) {
+                            ex.printStackTrace();
+                        }
+                    }
+                }
                 break;
             }
         }
@@ -125,7 +186,8 @@ public class Game {
     }
     
     public void updateScore(){
-         playerScore = ((playerHits/83)*100);
+        System.out.println((playerGuessBoard.getAccuracy()));
+        playerScore = ((playerHits)*100*(int)(playerGuessBoard.getAccuracy()));
     }
     
     public static int getScore (){

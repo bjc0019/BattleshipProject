@@ -33,8 +33,8 @@ public class playerBoard extends JFrame {
     public JMenu menu = new JMenu("Menu");
     public JMenuItem saveMenuItem = new JMenuItem("Save");
     public JMenuItem quitMenuItem = new JMenuItem("Quit");
-    public JMenuItem homeMenuItem = new JMenuItem("Home");
     public int[] last_coordinate_selected = {0,0};
+    public boolean vertical_placement = false;
 
     private JPanel friendlypanelLeft;
     private JPanel friendlypanelRight;
@@ -108,9 +108,35 @@ public class playerBoard extends JFrame {
         setJMenuBar(menuBar);
         JScrollPane scrollPane = new JScrollPane(textArea);
         
+        JPanel centerContents = new JPanel();
+        centerContents.setLayout(new BorderLayout());
+        centerContents.add(scrollPane, BorderLayout.WEST);
+        
+        //Add the ship orientation selection buttons
+        JPanel vButtonGrid = new JPanel();
+        vButtonGrid.setLayout(new GridLayout(2,1));
+        JButton verticalButton = new JButton();
+        verticalButton.setText("Vertical");
+        verticalButton.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e){
+                vertical_placement = true;
+            }
+        });
+        JButton horizontalButton = new JButton();
+        horizontalButton.setText("Horizontal");
+        horizontalButton.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e){
+                vertical_placement = false;
+            }
+        });
+        vButtonGrid.add(verticalButton);
+        vButtonGrid.add(horizontalButton);
+        
+        centerContents.add(vButtonGrid,BorderLayout.EAST);
+        
         getContentPane().add(friendlypanelLeft, BorderLayout.SOUTH);
         getContentPane().add(friendlypanelRight, BorderLayout.NORTH);
-        getContentPane().add(scrollPane, BorderLayout.CENTER);
+        getContentPane().add(centerContents, BorderLayout.CENTER);
         
         pack();
         setLocationRelativeTo(null);
@@ -119,11 +145,7 @@ public class playerBoard extends JFrame {
         //Create and the menu bar for the game.
         menu.add(saveMenuItem);
         menu.add(quitMenuItem);
-        menu.add(homeMenuItem);
         menuBar.add(menu);
-
-        
-        
         
         JLabel friendlyBoardLabel = new JLabel("Player Board");
         friendlyBoardLabel.setHorizontalAlignment(JLabel.CENTER);
@@ -159,15 +181,7 @@ public class playerBoard extends JFrame {
                     }
                 }
             }
-        });
-        
-        homeMenuItem.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-               dispose();
-               //menuBoard launchNewMenu = new menuBoard(playgameSemaphore);
-            }
-        });
-        
+        });        
     }
 
     /**
@@ -195,10 +209,11 @@ public class playerBoard extends JFrame {
         catch(InterruptedException e){
             e.printStackTrace();
         }
-        System.out.println("Coordinate returned:");
-        System.out.println(last_coordinate_selected[0]);
-        System.out.println(last_coordinate_selected[1]);
         return last_coordinate_selected;
+    }
+    
+    public boolean isVerticalPlacement(){
+        return vertical_placement;
     }
     
 }

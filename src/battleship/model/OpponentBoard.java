@@ -93,7 +93,7 @@ public class OpponentBoard {
         
         // Update accuracy
         if(numHits + numMisses != 0)
-            accuracy = numHits / (numHits + numMisses) * 100;
+            accuracy = (float)numHits / (numHits + numMisses) * 100;
     }
     
      

@@ -60,4 +60,7 @@ public abstract class Ship {
         System.out.println(x);
         System.out.println(y);
     }
+    public void setOrientation(boolean v){
+        isVertical = v;
+    }
 }

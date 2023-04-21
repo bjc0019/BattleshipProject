@@ -124,64 +124,61 @@ public class FriendlyBoard {
         // First, clear the board
         resetBoard();
         
-        // Declare holding variables for new ships
-        Carrier newCarrier = new Carrier(-1,-1,false);
-        BattleShip newBattleship = new BattleShip(-1,-1,false);
-        Cruiser newCruiser = new Cruiser(-1,-1,false);
-        Submarine newSubmarine = new Submarine(-1,-1,false);
-        Destroyer newDestroyer = new Destroyer(-1,-1,false);
-        
         //Get user input until it's valid
         this.setMessageBoard("Select a coordinate for your carrier."+'\n');
-        System.out.println("Select a coordinate for your carrier."+'\n');
-        newCarrier.setLocation(corresponding_button_panel.getUserInput());
+        int[] coordinate_input = corresponding_button_panel.getUserInput();
+        Carrier newCarrier = new Carrier(-1,-1,corresponding_button_panel.isVerticalPlacement());
+        newCarrier.setLocation(coordinate_input);
         while (placeShip(newCarrier) == false){
             this.setMessageBoard("Try again."+'\n');
-            System.out.println("Try again."+'\n');
             newCarrier.setLocation(corresponding_button_panel.getUserInput());
+            newCarrier.setOrientation(corresponding_button_panel.isVerticalPlacement());
         }
         updateBoatButtons();
         this.setMessageBoard("Select a coordinate for your battleship."+'\n');
-        System.out.println("Select a coordinate for your battleship."+'\n');
-        newBattleship.setLocation(corresponding_button_panel.getUserInput());
+        coordinate_input = corresponding_button_panel.getUserInput();
+        BattleShip newBattleship = new BattleShip(-1,-1,corresponding_button_panel.isVerticalPlacement());
+        newBattleship.setLocation(coordinate_input);
         while (placeShip(newBattleship) == false){
             this.setMessageBoard("Try again."+'\n');
-            System.out.println("Try again."+'\n');
             newBattleship.setLocation(corresponding_button_panel.getUserInput());
+            newBattleship.setOrientation(corresponding_button_panel.isVerticalPlacement());
         }
         updateBoatButtons();
         
         this.setMessageBoard("Select a coordinate for your cruiser."+'\n');
         System.out.println("Select a coordinate for your cruiser."+'\n');
-        newCruiser.setLocation(corresponding_button_panel.getUserInput());
+        coordinate_input = corresponding_button_panel.getUserInput();
+        Cruiser newCruiser = new Cruiser(-1,-1,corresponding_button_panel.isVerticalPlacement());
+        newCruiser.setLocation(coordinate_input);
         while (placeShip(newCruiser) == false){
             this.setMessageBoard("Try again."+'\n');
-            System.out.println("Try again."+'\n');
             newCruiser.setLocation(corresponding_button_panel.getUserInput());
+            newCruiser.setOrientation(corresponding_button_panel.isVerticalPlacement());
         }
         updateBoatButtons();
         
         this.setMessageBoard("Select a coordinate for your submarine."+'\n');
-        System.out.println("Select a coordinate for your submarine."+'\n');
-        newSubmarine.setLocation(corresponding_button_panel.getUserInput());
+        coordinate_input = corresponding_button_panel.getUserInput();
+        Submarine newSubmarine = new Submarine(-1,-1,corresponding_button_panel.isVerticalPlacement());
+        newSubmarine.setLocation(coordinate_input);
         while (placeShip(newSubmarine) == false){
             this.setMessageBoard("Try again."+'\n');
-            System.out.println("Try again."+'\n');
             newSubmarine.setLocation(corresponding_button_panel.getUserInput());
+            newSubmarine.setOrientation(corresponding_button_panel.isVerticalPlacement());
         }
         updateBoatButtons();
         
         this.setMessageBoard("Select a coordinate for your destroyer."+'\n');
-        System.out.println("Select a coordinate for your destroyer."+'\n');
-        newDestroyer.setLocation(corresponding_button_panel.getUserInput());
+        coordinate_input = corresponding_button_panel.getUserInput();
+        Destroyer newDestroyer = new Destroyer(-1,-1,corresponding_button_panel.isVerticalPlacement());
+        newDestroyer.setLocation(coordinate_input);
         while (placeShip(newDestroyer) == false){
             this.setMessageBoard("Try again."+'\n');
-            System.out.println("Try again.");
             newDestroyer.setLocation(corresponding_button_panel.getUserInput());
         }
         updateBoatButtons();
         this.setMessageBoard("All boats placed" +'\n');
-        System.out.println("All boats placed!"+'\n');
     }
     
     
