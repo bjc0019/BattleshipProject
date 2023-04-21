@@ -21,6 +21,9 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.concurrent.Semaphore;
 
+/**
+ * Represents the player's boards.
+ */
 public class playerBoard extends JFrame {
     
     public JMenuBar menuBar = new JMenuBar();
@@ -39,6 +42,9 @@ public class playerBoard extends JFrame {
     public static JButton[][] friendlyPanelButtonsLeft;
     public static JButton[][] friendlyPanelButtonsRight;
     
+    /**
+     * Constructor for the player's two boards, the ship board and the player's guess board.
+     */
     public playerBoard() {
 
         setTitle("BattleShip");
@@ -125,7 +131,9 @@ public class playerBoard extends JFrame {
         // Menu -> Quit action listener
         quitMenuItem.addActionListener(e -> System.exit(0));
 
-        // Add action listener to save menu item
+        /**
+         * Add action listener to save menu item.
+         */         
         saveMenuItem.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -141,10 +149,18 @@ public class playerBoard extends JFrame {
         });
     }
 
+    /**
+     * Gets player ship board.
+     * @return player ship board.
+     */
     public JButton[][] getFriendlyBoardButtons() {
         return friendlyPanelButtonsLeft;
     }
 
+    /**
+     * Gets player's guess board.
+     * @return player's guess board.
+     */
     public JButton[][] getBotBoardButtons() {
         return friendlyPanelButtonsRight;
     }

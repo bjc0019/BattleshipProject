@@ -13,8 +13,9 @@ import java.awt.event.MouseListener;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.concurrent.Semaphore;
+
 /**
- *
+ * High scores are displayed here. Can be checked when player is at main menu.
  * @author sbp0014
  */
 public class leaderBoard extends JFrame{
@@ -30,6 +31,9 @@ public class leaderBoard extends JFrame{
     private JPanel leaderboardPanel;
     private Semaphore currentSemaphore;
     
+    /**
+     * The constructor for the leader board.
+     */
     public leaderBoard() {
 
         setTitle("BattleShip");
@@ -66,16 +70,4 @@ public class leaderBoard extends JFrame{
         // Menu -> Quit action listener
         quitMenuItem.addActionListener(e -> System.exit(0));
     }
-    /*
-    public void getUserInput(){
-        // Use a semaphore to delay the execution until there's a response.
-        currentSemaphore = new Semaphore(0);
-        try{
-            currentSemaphore.acquire();
-        }
-        catch(InterruptedException e){
-            e.printStackTrace();
-        }
-    }
-    */
 }

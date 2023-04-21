@@ -78,6 +78,10 @@ public class debugGUI {
         }
     }
     
+    /**
+     * Used for instantiating new boats whenever player places ships.
+     * @param _fboard Board where user's boats are placed.
+     */
     public void placeShips(FriendlyBoard _fboard) {
         BattleShip battleship = new BattleShip();
         Carrier carrier = new Carrier();
@@ -86,17 +90,11 @@ public class debugGUI {
         Submarine submarine = new Submarine();
         };
 
-        // add the MouseAdapter to each button in the friendlyBoard
-        //gameBoard view = new playerBoard();
-        //JButton[][] friendlyBoardButtons = view.getFriendlyBoardButtons();
-        //for (int row = 0; row < 10; row++) {
-         //   for (int col = 0; col < 10; col++) {
-         //       friendlyBoardButtons[row][col].addMouseListener(mouseAdapter);
-        //    }
-        //}
-    
-
-
+    /**
+     * Prints the two boards that the user interacts with on the main game panel. The top board is the player's guess board, the bottom board is the player's ship board.
+     * @param _fboard Player's ship board.
+     * @param _oboard Player's guess board.
+     */
     public void printBoard(FriendlyBoard _fboard, OpponentBoard _oboard)
     {
         // Print Opponent Board first
@@ -162,7 +160,11 @@ public class debugGUI {
     }
     
     
-    // Prints game over screen and player stats
+    /**
+     * Prints game over screen and player stats
+     * @param _playerWon used to display results of game.
+     * @param _oboard player's guess board; used for player to make guesses and retrieve player accuracy.
+     */
     public void gameOver(boolean _playerWon, OpponentBoard _oboard)
     {
         if(_playerWon)
@@ -175,7 +177,11 @@ public class debugGUI {
         sc.next();
     }
             
-            
+    /**
+     * Used to display type of ship being placed and orientation.
+     * @param _shipName Name of the type of ship being placed by user.
+     * @param _shipToPlace Type of ship being placed by user.
+     */
     private void getShipInfo(String _shipName, Ship _shipToPlace)
     {
         System.out.println("\nEnter the x value for the base of the " + _shipName + ":");

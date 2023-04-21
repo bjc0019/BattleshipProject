@@ -9,8 +9,8 @@ public class Carrier extends Ship {
     
     /** 
      * Constructor with input parameters 
-     * @param _x
-     * @param _y
+     * @param _x Horizontal location
+     * @param _y Vertical location
      * @param _isVertical Determines whether the ship is placed up/down or sideways
      */
     public Carrier(int _x, int _y, boolean _isVertical)

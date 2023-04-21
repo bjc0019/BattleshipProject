@@ -14,7 +14,12 @@ public abstract class Ship {
     public int length;  // Length of this ship
     public char charRepresentation;  // The character this ship is rep'd by on the board
     
-    // Constructors
+    /** 
+     * Constructor with input parameters 
+     * @param _x Horizontal location
+     * @param _y Vertical location
+     * @param _isVertical Determines whether the ship is placed up/down or sideways
+     */
     protected Ship(int _x, int _y, boolean _isVertical)
     {
         x = _x;
