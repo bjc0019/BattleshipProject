@@ -5,7 +5,7 @@
 package battleship.view;
 
 /**
- *
+ * End game board that is displayed whenever game is won or lost. Is used to announce the winner of the game, replay, or quit the game.
  * @author joshpohly
  */
 public class endBoard {

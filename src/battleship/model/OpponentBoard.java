@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 /**
- *
+ * Represents the AI/Bot board.
  * @author bcalv
  */
 public class OpponentBoard {
@@ -97,7 +97,9 @@ public class OpponentBoard {
     }
     
      
-// Currently printing Opponent Boats
+/**
+ * Stores the location of the AI's boats. These are not visible to the player.
+ */
     public void updateGuessButtons() {
         for(int i = 0; i < BOARD_SIZE; i++) {
             for(int j = 0; j < BOARD_SIZE; j++) {
@@ -108,43 +110,6 @@ public class OpponentBoard {
             }
         }
     }  
-       
- 
-    
-    
-    
-   /*
-    public void updateBoardButtons() {
-    for(int i = 0; i < BOARD_SIZE; i++) {
-        for(int j = 0; j < BOARD_SIZE; j++) {
-            try {
-                if (this.getTile(j, BOARD_SIZE - 1 - i) == 'E') {
-                    playerBoard.friendlyPanelButtonsRight[i][j].setText("O!");
-                } else {
-                    playerBoard.friendlyPanelButtonsRight[i][j].setText(Character.toString(this.getTile(j, BOARD_SIZE - 1 - i)));
-                }
-       
-                // Update friendlyPanelButtonsRight
-                char tile = this.getTile(j, BOARD_SIZE - 1 - i);
-                if (tile == 'H') {
-                    playerBoard.friendlyPanelButtonsRight[i][j].setText("H");
-                    playerBoard.friendlyPanelButtonsRight[i][j].setBackground(Color.RED);
-                } else if (tile == 'M') {
-                    playerBoard.friendlyPanelButtonsRight[i][j].setText("M");
-                    playerBoard.friendlyPanelButtonsRight[i][j].setBackground(Color.WHITE);
-                } else {
-                    playerBoard.friendlyPanelButtonsRight[i][j].setText(" ");
-                }
-                
-            } catch(IndexOutOfBounds ex) {
-                System.out.println("Error updating board buttons: " + ex.getMessage());
-                System.exit(1);
-            }
-        }
-    }
-}
-*/
- /**   
    
     /**
      * Returns char value at x,y.
@@ -190,24 +155,4 @@ public class OpponentBoard {
         // Return coordinate pair
         return returnValue;
     }
-    
-/**
-    public void updateBoardButtons() {
-        for(int i = 0; i < BOARD_SIZE; i++) {
-            for(int j = 0; j < BOARD_SIZE; j++) {
-                try {
-                    if (this.getTile(j, BOARD_SIZE - 1 - i) == 'E')
-                        gameBoard.botBoardButtons[i][j].setText(" ");
-                    else
-                        gameBoard.botBoardButtons[i][j].setText(Character.toString(this.getTile(j, BOARD_SIZE - 1 - i)));
-                }
-                catch(IndexOutOfBounds ex) {
-                    System.out.println("Error updating board buttons: " + ex.getMessage());
-                    System.exit(1);
-                }
-            }
-        }
-    }
-*/
-
 }

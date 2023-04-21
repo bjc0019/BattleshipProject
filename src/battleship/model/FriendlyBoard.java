@@ -7,7 +7,9 @@ import battleship.model.ships.Cruiser;
 import battleship.model.ships.Destroyer;
 import battleship.view.*;
 
-
+/**
+ * Represents the players version of the ship board.
+ */
 public class FriendlyBoard {
     // *********************************************************************************************
     // Variable Declaration
@@ -113,6 +115,10 @@ public class FriendlyBoard {
             newDestroyer.randomizeLocation();
     }
     
+    /**
+     * Allows players to choose the location and orientation of their ships as they place them on their ship board.
+     * @param corresponding_button_panel button panel that the player interacts with to place their ships
+     */
     public void playerPlaceShips(playerBoard corresponding_button_panel)
     {
         // First, clear the board
@@ -180,7 +186,9 @@ public class FriendlyBoard {
     
     
 
-    // Curentlt printing friendly boats
+    /**
+     * Prints location of the player's boats after they have been placed.
+     */
     public void updateBoatButtons() { 
         for(int i = 0; i < BOARD_SIZE; i++) {
             for(int j = 0; j < BOARD_SIZE; j++) {
@@ -191,36 +199,6 @@ public class FriendlyBoard {
             }
         }
     }
-   
-
-    
-    //private playerBoard thisGUI; // Add playerBoard member variable
-    
-   // public void setLabel(String label) {
-    //    thisGUI.titleLabel.setText(label); // Use playerBoard reference to access titleLabel object
-    //}
-    /** Prints the current board to the console, used for debugging. */
-    /*
-    public void printBoard()
-    {
-        for(int i = 0; i < BOARD_SIZE; i++) {
-            for(int j = 0; j < BOARD_SIZE; j++) 
-                try {
-                    if (this.getTile(j, BOARD_SIZE - 1 - i) == 'E')
-                        System.out.print(" ");
-                    else
-                        System.out.print(this.getTile(j, BOARD_SIZE - 1 - i));
-                    System.out.print(", ");
-                }
-                catch(IndexOutOfBounds ex) {
-                    System.out.println("Error printing board to the terminal: " + ex.getMessage());
-                    System.exit(1);
-                }
-                        
-            System.out.println("");
-        }
-    }
-    
 
     /** 
      * Places ship on the board and returns true if successful, or false if 
@@ -348,6 +326,10 @@ public class FriendlyBoard {
         
     }
     
+    /**
+     * Used to update the instructions/confirmations given to the player as they update their ship locations.
+     * @param stringArgument 
+     */
     public void setMessageBoard(String stringArgument){
         playerBoard.textArea.append(stringArgument);  
     }

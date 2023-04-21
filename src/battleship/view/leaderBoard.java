@@ -15,8 +15,9 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.concurrent.Semaphore;
+
 /**
- *
+ * High scores are displayed here. Can be checked when player is at main menu.
  * @author sbp0014
  */
 public class leaderBoard extends JFrame{
@@ -31,6 +32,9 @@ public class leaderBoard extends JFrame{
 
     private JPanel leaderboardPanel;
     
+    /**
+     * The constructor for the leader board.
+     */
     public leaderBoard() {
 
         setTitle("BattleShip");

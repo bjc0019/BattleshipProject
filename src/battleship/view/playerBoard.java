@@ -24,6 +24,9 @@ import java.util.concurrent.Semaphore;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+/**
+ * Represents the player's boards.
+ */
 public class playerBoard extends JFrame {
     
     public JMenuBar menuBar = new JMenuBar();
@@ -42,6 +45,9 @@ public class playerBoard extends JFrame {
     public static JButton[][] friendlyPanelButtonsLeft;
     public static JButton[][] friendlyPanelButtonsRight;
     
+    /**
+     * Constructor for the player's two boards, the ship board and the player's guess board.
+     */
     public playerBoard() {
 
         setTitle("BattleShip");
@@ -164,10 +170,18 @@ public class playerBoard extends JFrame {
         
     }
 
+    /**
+     * Gets player ship board.
+     * @return player ship board.
+     */
     public JButton[][] getFriendlyBoardButtons() {
         return friendlyPanelButtonsLeft;
     }
 
+    /**
+     * Gets player's guess board.
+     * @return player's guess board.
+     */
     public JButton[][] getBotBoardButtons() {
         return friendlyPanelButtonsRight;
     }

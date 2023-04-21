@@ -11,10 +11,17 @@ import java.util.concurrent.Semaphore;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * Represents the main menu of Battleship game.
+ */
 public class menuBoard extends JFrame {
     private JPanel menuPanel;
     private Semaphore playgameSemaphore;
     
+    /**
+     * constructor for the game.
+     * @param playgameSemaphore used to wait for user input before proceeding with playing the game and getting input for the user's guesses.
+     */
     public menuBoard(Semaphore playgameSemaphore) {    // Takes a semaphore to control the continuation of calling code until play game is pressed.
         setTitle("Start Menu");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

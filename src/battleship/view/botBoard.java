@@ -17,6 +17,9 @@ import java.awt.event.MouseListener;
 import java.io.FileWriter;
 import java.io.IOException;
 
+/**
+ * Represents the AI/Bot board.
+ */
 public class botBoard extends JFrame {
     
     public JMenuBar menuBar = new JMenuBar();
@@ -27,6 +30,9 @@ public class botBoard extends JFrame {
     public static JButton[][] botPanelButtonsLeft;
     public static JButton[][] botPanelButtonsRight;
     
+    /**
+     * Constructor for the bot boards.
+     */
     public botBoard() {
 
         setTitle("BattleShip");
@@ -82,14 +88,19 @@ public class botBoard extends JFrame {
 
     }
     
+    /**
+     * Returns the boat locations for the AI's ships. This will not be visible to the user.
+     * @return 
+     */
     public JButton[][] getFriendlyBoardButtons() {
         return botPanelButtonsLeft;
     }
 
+    /**
+     * Returns the hit/miss board for the AI. This will not be visible to the user.
+     * @return 
+     */
     public JButton[][] getBotBoardButtons() {
         return botPanelButtonsRight;
     }
-    
-    
-    
 }

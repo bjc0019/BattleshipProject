@@ -8,6 +8,10 @@ import java.util.concurrent.Semaphore;
 
 
 
+/**
+ * Represents Battleship game. Consists of the main objects that make up the game,
+ * along with functions that allow the game to run until completion.
+ */
 public class Game {
 
     // ******************************************************************************************************************
