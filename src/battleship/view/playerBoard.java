@@ -53,7 +53,7 @@ public class playerBoard extends JFrame {
     public playerBoard() {
 
         setTitle("BattleShip");
-        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
         //Create the GameBoard GUI, a 10x10 grid to play on that 
         //displays both the bot and user boards.

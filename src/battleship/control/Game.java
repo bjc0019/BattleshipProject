@@ -4,11 +4,13 @@ import battleship.model.FriendlyBoard;
 import java.util.Objects;
 import java.util.Random;
 import battleship.view.*; 
+import java.awt.Color;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.concurrent.Semaphore;
+import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
@@ -161,6 +163,9 @@ public class Game {
     /** Function that handles all the board logic when a user guesses on the board */
     private void processTurn()
     {
+        JButton friendlyButtons[][] = launchPlayerView.getFriendlyBoardButtons();
+        JButton opponentButtons[][] = launchPlayerView.getBotBoardButtons();
+        
         // First, get input from the user and make sure it's not a square they've guessed before
         do {
         this.updateScore();    
@@ -171,18 +176,24 @@ public class Game {
             if(botShipBoard.getTile(coordinate[0], coordinate[1]) != 'E') {
                 playerGuessBoard.updateBoard(coordinate[0], coordinate[1], 'H');
                 playerHits++;
+                opponentButtons[BOARD_SIZE - 1 - coordinate[1]][coordinate[0]].setBackground(Color.red);
             }
-            else 
+            else {
                 playerGuessBoard.updateBoard(coordinate[0], coordinate[1], 'M');
+                opponentButtons[BOARD_SIZE - 1 - coordinate[1]][coordinate[0]].setBackground(Color.white);
+            }
 
             // Next, the bot. The bot won't guess the same square twice
             coordinate = botGuessBoard.generateGuess();
             if(playerShipBoard.getTile(coordinate[0], coordinate[1]) != 'E') {
                 botGuessBoard.updateBoard(coordinate[0], coordinate[1], 'H');
                 botHits++;
+                friendlyButtons[BOARD_SIZE - 1 - coordinate[1]][coordinate[0]].setBackground(Color.red);
             }
-            else
+            else {
                 botGuessBoard.updateBoard(coordinate[0], coordinate[1], 'M');
+                friendlyButtons[BOARD_SIZE - 1 - coordinate[1]][coordinate[0]].setBackground(Color.white);
+            }
     }
     
     public void updateScore(){
