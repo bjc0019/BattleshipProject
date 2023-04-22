@@ -105,8 +105,14 @@ public class OpponentBoard {
             for(int j = 0; j < BOARD_SIZE; j++) {
                 if (this.getTile(j, BOARD_SIZE - 1 - i) == 'E')
                     playerBoard.friendlyPanelButtonsRight[i][j].setText(" ");
-                else
-                    playerBoard.friendlyPanelButtonsRight[i][j].setText(Character.toString(this.getTile(j, BOARD_SIZE - 1 - i)));
+                else {
+                    String charToSet = Character.toString(this.getTile(j, BOARD_SIZE - 1 - i));
+                    if(charToSet.equalsIgnoreCase("H")) {
+                        playerBoard.friendlyPanelButtonsRight[i][j].setBackground(Color.RED);
+                        playerBoard.friendlyPanelButtonsRight[i][j].setVisible(true);
+                    }
+                    playerBoard.friendlyPanelButtonsRight[i][j].setText(charToSet);
+                }
             }
         }
     }  

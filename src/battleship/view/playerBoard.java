@@ -45,6 +45,8 @@ public class playerBoard extends JFrame {
     public static JButton[][] friendlyPanelButtonsLeft;
     public static JButton[][] friendlyPanelButtonsRight;
     
+    ImageIcon backgroundImage = new ImageIcon("src/Files/mainBackground.jpg");
+    
     /**
      * Constructor for the player's two boards, the ship board and the player's guess board.
      */
@@ -56,14 +58,14 @@ public class playerBoard extends JFrame {
         //Create the GameBoard GUI, a 10x10 grid to play on that 
         //displays both the bot and user boards.
         friendlypanelLeft = new JPanel();
-        friendlypanelLeft.setLayout(new GridLayout(10, 10, 0, 0)); //set grid dimensions
-        friendlypanelLeft.setPreferredSize(new Dimension(450, 300)); // Set preferred size
+        friendlypanelLeft.setLayout(new GridLayout(10, 10, 10, 10)); //set grid dimensions
+        friendlypanelLeft.setPreferredSize(new Dimension(550, 300)); // Set preferred size
         
         friendlyPanelButtonsLeft = new JButton[10][10];
         
         friendlypanelRight = new JPanel();
-        friendlypanelRight.setLayout(new GridLayout(10, 10, 0, 0));
-        friendlypanelRight.setPreferredSize(new Dimension(450, 300)); // Set preferred size
+        friendlypanelRight.setLayout(new GridLayout(10, 10, 10, 10));
+        friendlypanelRight.setPreferredSize(new Dimension(550, 300)); // Set preferred size
         
         friendlyPanelButtonsRight = new JButton[10][10];
 
